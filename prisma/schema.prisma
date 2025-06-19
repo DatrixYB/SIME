@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"s
+}
+
+datasource db {
+  // provider = "postgresql"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  role      UserRole
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sales     Sale[]
+}
+
+enum UserRole {
+  ADMIN
+  SELLER
+  MANAGER
+}
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String?
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sales     Sale[]
+}
+
+model Product {
+  id          Int        @id @default(autoincrement())
+  name        String
+  price       Float
+  stock       Int
+  description String?
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  saleItems   SaleItem[]
+}
+
+model Sale {
+  id          Int         @id @default(autoincrement())
+  date        DateTime    @default(now())
+  total       Float
+  clientId    Int
+  userId      Int
+  paymentId   Int
+
+  client      Client      @relation(fields: [clientId], references: [id])
+  user        User        @relation(fields: [userId], references: [id])
+  payment     Payment     @relation(fields: [paymentId], references: [id])
+  items       SaleItem[]
+}
+
+model SaleItem {
+  id         Int      @id @default(autoincrement())
+  saleId     Int
+  productId  Int
+  quantity   Int
+  price      Float     // Precio unitario en el momento de venta
+
+  sale       Sale     @relation(fields: [saleId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+}
+
+model Payment {
+  id           Int        @id @default(autoincrement())
+  method       PaymentType
+  reference    String?     // Referencia bancaria, número de recibo, etc.
+  paidAt       DateTime    @default(now())
+  amount       Float
+
+  Sale Sale[]
+}
+
+enum PaymentType {
+  CASH
+  CARD
+  TRANSFER
+  DIGITAL_WALLET
+}
