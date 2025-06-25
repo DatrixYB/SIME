@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { UserRole } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { ConflictException, BadRequestException } from '@nestjs/common';
-import { prismaMock } from '../../test/__mock__/prisma.mock';
+import { prismaMock } from '../../../test/__mock__/prisma.mock';
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
 import { CreateUserDto } from './dto/create-user.dto'; // Asegúrate de tener este DTO
