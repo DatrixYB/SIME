@@ -23,45 +23,38 @@
           <mxGeometry x="787" y="454" width="170" height="280" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-4" value="Sistema&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Punto de Venta (POS)&lt;/span&gt;" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="1037" y="444" width="183" height="60" as="geometry" />
+          <mxGeometry x="1037" y="454" width="183" height="60" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-5" value="Sistema de&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Gestión de Clientes (CRM)&lt;/span&gt;" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="1037" y="524" width="203" height="66" as="geometry" />
+          <mxGeometry x="1037" y="547" width="203" height="66" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-6" value="Sitema&amp;nbsp;Finanzas y Contabilidad Básica" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="1037" y="604" width="203" height="60" as="geometry" />
+          <mxGeometry x="1037" y="640" width="203" height="60" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-7" value="Sistema&amp;nbsp;Panel Administrativo y Reportes" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="1037" y="684" width="213" height="60" as="geometry" />
+          <mxGeometry x="510" y="640" width="213" height="60" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-20" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;startArrow=none;startFill=0;jettySize=auto;orthogonalLoop=1;fontSize=18;elbow=vertical;" parent="1" source="3a17f1ce550125da-8" target="3a17f1ce550125da-2" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="757" y="514" />
+              <mxPoint x="757" y="490" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="3a17f1ce550125da-8" value="Sistema Inventario y stock" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="530" y="480" width="187" height="70" as="geometry" />
+          <mxGeometry x="536" y="454" width="187" height="70" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-21" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;startArrow=none;startFill=0;jettySize=auto;orthogonalLoop=1;fontSize=18;elbow=vertical;" parent="1" source="3a17f1ce550125da-9" target="3a17f1ce550125da-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-9" value="Sistema&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Gestión de Usuarios y Roles&lt;/span&gt;" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="460" y="634" width="257" height="60" as="geometry" />
+          <mxGeometry x="466" y="550" width="257" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cfBRoqMdeuwh2s0kzKoJ-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.422;exitY=0.03;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="3a17f1ce550125da-10" target="3a17f1ce550125da-2">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-10" value="Configuración y Parametrización del Sistema" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="799.5" y="774" width="180.5" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="3a17f1ce550125da-23" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;startArrow=none;startFill=0;jettySize=auto;orthogonalLoop=1;fontSize=18;" parent="1" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="887" y="774" as="sourcePoint" />
-            <mxPoint x="887" y="734" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="887" y="754" />
-              <mxPoint x="887" y="754" />
-            </Array>
-          </mxGeometry>
+          <mxGeometry x="797" y="790" width="180.5" height="120" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
