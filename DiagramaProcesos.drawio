@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36" version="27.1.6">
   <diagram name="Page-1" id="90a13364-a465-7bf4-72fc-28e22215d7a0">
-    <mxGraphModel dx="1408" dy="748" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1464" dy="644" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" style=";html=1;" />
         <mxCell id="1" style=";html=1;" parent="0" />
@@ -26,20 +26,20 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="3a17f1ce550125da-2" value="Custom switch Matrix&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;(switches, couplers, mixer, amps, attenu, splitters)&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+        <mxCell id="3a17f1ce550125da-2" value="SIME" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
           <mxGeometry x="787" y="454" width="170" height="280" as="geometry" />
         </mxCell>
-        <mxCell id="3a17f1ce550125da-4" value="Spectrum Analyzer" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="1037" y="444" width="120" height="60" as="geometry" />
+        <mxCell id="3a17f1ce550125da-4" value="Sistema&amp;nbsp;&lt;strong style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Punto de Venta (POS)&lt;/strong&gt;" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="1037" y="444" width="183" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="3a17f1ce550125da-5" value="Network Analyzer" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="1037" y="524" width="120" height="60" as="geometry" />
+        <mxCell id="3a17f1ce550125da-5" value="Sistema de&amp;nbsp;&lt;strong style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Gestión de Clientes (CRM)&lt;/strong&gt;" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="1037" y="524" width="203" height="66" as="geometry" />
         </mxCell>
-        <mxCell id="3a17f1ce550125da-6" value="Power Meter" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="1037" y="604" width="120" height="60" as="geometry" />
+        <mxCell id="3a17f1ce550125da-6" value="Sitema&amp;nbsp;Finanzas y Contabilidad Básica" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="1037" y="604" width="203" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="3a17f1ce550125da-7" value="Freq. Count" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="1037" y="684" width="120" height="60" as="geometry" />
+        <mxCell id="3a17f1ce550125da-7" value="Sistema&amp;nbsp;Panel Administrativo y Reportes" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="1037" y="684" width="213" height="60" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-20" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;startArrow=none;startFill=0;jettySize=auto;orthogonalLoop=1;fontSize=18;elbow=vertical;" parent="1" source="3a17f1ce550125da-8" target="3a17f1ce550125da-2" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -48,23 +48,17 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="3a17f1ce550125da-8" value="Vector Signal Generator" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="597" y="444" width="120" height="150" as="geometry" />
+        <mxCell id="3a17f1ce550125da-8" value="Sistema Inventario y stock" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="530" y="480" width="187" height="70" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-21" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;startArrow=none;startFill=0;jettySize=auto;orthogonalLoop=1;fontSize=18;elbow=vertical;" parent="1" source="3a17f1ce550125da-9" target="3a17f1ce550125da-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="3a17f1ce550125da-9" value="ARB / Mod Source" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="597" y="634" width="120" height="60" as="geometry" />
+        <mxCell id="3a17f1ce550125da-9" value="Sistema&amp;nbsp;&lt;strong style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Gestión de Usuarios y Roles&lt;/strong&gt;" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="460" y="634" width="257" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="3a17f1ce550125da-10" value="DUT" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="799.5" y="774" width="145" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="3a17f1ce550125da-18" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;startArrow=none;startFill=0;jettySize=auto;orthogonalLoop=1;fontSize=18;elbow=vertical;" parent="1" source="3a17f1ce550125da-11" target="3a17f1ce550125da-10" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="3a17f1ce550125da-11" value="DC Power Supplies" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="597" y="804" width="120" height="60" as="geometry" />
+        <mxCell id="3a17f1ce550125da-10" value="Configuración y Parametrización del Sistema" style="whiteSpace=wrap;html=1;shadow=1;fontSize=18;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="799.5" y="774" width="180.5" height="120" as="geometry" />
         </mxCell>
         <mxCell id="3a17f1ce550125da-22" style="edgeStyle=elbowEdgeStyle;rounded=0;html=1;startArrow=none;startFill=0;jettySize=auto;orthogonalLoop=1;fontSize=18;" parent="1" source="3a17f1ce550125da-10" target="3a17f1ce550125da-2" edge="1">
           <mxGeometry relative="1" as="geometry">
