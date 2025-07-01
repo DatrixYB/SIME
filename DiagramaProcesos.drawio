@@ -549,7 +549,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-96" value="idle-actualizado&#xa;productos/ventas" style="" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-93">
-          <mxGeometry x="15.370125238679375" y="103.05263157894737" width="84.53568881273654" height="46.8421052631579" as="geometry" />
+          <mxGeometry x="8.279999999999998" y="95.03" width="91.63" height="62.89" as="geometry" />
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-97" value="Descuenta &#xa;inventario" style="" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-93">
           <mxGeometry x="15.370125238679375" y="206.10526315789474" width="84.53568881273654" height="46.8421052631579" as="geometry" />
