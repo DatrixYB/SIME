@@ -184,7 +184,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="JLT5EOWbu2_unH0VoCmM" name="Página-3">
-    <mxGraphModel dx="1555" dy="672" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1685" dy="728" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -291,7 +291,7 @@
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-25" value="dispatch&#xa;command&#xa;worker thread" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
           <mxGeometry x="131.16666666666666" y="304.4736842105263" width="103.0595238095238" height="46.8421052631579" as="geometry" />
         </mxCell>
-        <mxCell id="mnQk-e2eJ09kS2U4eIUH-26" value="MGUIware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
+        <mxCell id="mnQk-e2eJ09kS2U4eIUH-26" value="Midleware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
           <mxGeometry x="98.37499999999999" y="459.0526315789474" width="93.69047619047618" height="46.8421052631579" as="geometry" />
         </mxCell>
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-27" value="" style="endArrow=none;strokeColor=#FF0000;endFill=0;rounded=0;dashed=1" edge="1" parent="mnQk-e2eJ09kS2U4eIUH-11" source="mnQk-e2eJ09kS2U4eIUH-17" target="mnQk-e2eJ09kS2U4eIUH-26">
@@ -442,7 +442,7 @@
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-69" value="dispatch&#xa;command&#xa;worker thread" style="" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-55">
           <mxGeometry x="116.52018149530032" y="304.4736842105263" width="91.55157117487882" height="46.8421052631579" as="geometry" />
         </mxCell>
-        <mxCell id="rLn4Sj_fgA7SqJmoeYEY-70" value="MGUIware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-55">
+        <mxCell id="rLn4Sj_fgA7SqJmoeYEY-70" value="Midleware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-55">
           <mxGeometry x="87.39013612147524" y="459.0526315789474" width="83.22870106807166" height="46.8421052631579" as="geometry" />
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-71" value="" style="endArrow=none;strokeColor=#FF0000;endFill=0;rounded=0;dashed=1" edge="1" parent="rLn4Sj_fgA7SqJmoeYEY-55" source="rLn4Sj_fgA7SqJmoeYEY-61" target="rLn4Sj_fgA7SqJmoeYEY-70">
@@ -593,7 +593,7 @@
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-107" value="dispatch&#xa;command&#xa;worker thread" style="" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-93">
           <mxGeometry x="107.5908766707556" y="304.4736842105263" width="84.53568881273654" height="46.8421052631579" as="geometry" />
         </mxCell>
-        <mxCell id="rLn4Sj_fgA7SqJmoeYEY-108" value="MGUIware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-93">
+        <mxCell id="rLn4Sj_fgA7SqJmoeYEY-108" value="Midleware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-93">
           <mxGeometry x="80.6931575030667" y="459.0526315789474" width="76.85062619339685" height="46.8421052631579" as="geometry" />
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-109" value="" style="endArrow=none;strokeColor=#FF0000;endFill=0;rounded=0;dashed=1" edge="1" parent="rLn4Sj_fgA7SqJmoeYEY-93" source="rLn4Sj_fgA7SqJmoeYEY-99" target="rLn4Sj_fgA7SqJmoeYEY-108">
@@ -744,7 +744,7 @@
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-146" value="dispatch&#xa;command&#xa;worker thread" style="" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-132">
           <mxGeometry x="131.16666666666666" y="304.4736842105263" width="103.0595238095238" height="46.8421052631579" as="geometry" />
         </mxCell>
-        <mxCell id="rLn4Sj_fgA7SqJmoeYEY-147" value="MGUIware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-132">
+        <mxCell id="rLn4Sj_fgA7SqJmoeYEY-147" value="Midleware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-132">
           <mxGeometry x="98.37499999999999" y="459.0526315789474" width="93.69047619047618" height="46.8421052631579" as="geometry" />
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-148" value="" style="endArrow=none;strokeColor=#FF0000;endFill=0;rounded=0;dashed=1" edge="1" parent="rLn4Sj_fgA7SqJmoeYEY-132" source="rLn4Sj_fgA7SqJmoeYEY-138" target="rLn4Sj_fgA7SqJmoeYEY-147">
@@ -895,7 +895,7 @@
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-184" value="dispatch&#xa;command&#xa;worker thread" style="" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-170">
           <mxGeometry x="131.16666666666666" y="304.4736842105263" width="103.0595238095238" height="46.8421052631579" as="geometry" />
         </mxCell>
-        <mxCell id="rLn4Sj_fgA7SqJmoeYEY-185" value="MGUIware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-170">
+        <mxCell id="rLn4Sj_fgA7SqJmoeYEY-185" value="Midleware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-170">
           <mxGeometry x="98.37499999999999" y="459.0526315789474" width="93.69047619047618" height="46.8421052631579" as="geometry" />
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-186" value="" style="endArrow=none;strokeColor=#FF0000;endFill=0;rounded=0;dashed=1" edge="1" parent="rLn4Sj_fgA7SqJmoeYEY-170" source="rLn4Sj_fgA7SqJmoeYEY-176" target="rLn4Sj_fgA7SqJmoeYEY-185">
@@ -1046,7 +1046,7 @@
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-222" value="dispatch&#xa;command&#xa;worker thread" style="" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-208">
           <mxGeometry x="131.16666666666666" y="304.4736842105263" width="103.0595238095238" height="46.8421052631579" as="geometry" />
         </mxCell>
-        <mxCell id="rLn4Sj_fgA7SqJmoeYEY-223" value="MGUIware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-208">
+        <mxCell id="rLn4Sj_fgA7SqJmoeYEY-223" value="Midleware security" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="rLn4Sj_fgA7SqJmoeYEY-208">
           <mxGeometry x="98.37499999999999" y="459.0526315789474" width="93.69047619047618" height="46.8421052631579" as="geometry" />
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-224" value="" style="endArrow=none;strokeColor=#FF0000;endFill=0;rounded=0;dashed=1" edge="1" parent="rLn4Sj_fgA7SqJmoeYEY-208" source="rLn4Sj_fgA7SqJmoeYEY-214" target="rLn4Sj_fgA7SqJmoeYEY-223">
