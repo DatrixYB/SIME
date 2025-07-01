@@ -96,7 +96,7 @@
         <mxCell id="tcPPATNTlsftu_3hCiL_-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="eNaXL-9cgPmAJfwcyRmv-3" target="eNaXL-9cgPmAJfwcyRmv-14">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eNaXL-9cgPmAJfwcyRmv-3" value="Operador Almacen" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+        <mxCell id="eNaXL-9cgPmAJfwcyRmv-3" value="Operador Almacén" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
           <mxGeometry x="58" y="425" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="eNaXL-9cgPmAJfwcyRmv-37" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="eNaXL-9cgPmAJfwcyRmv-4" target="eNaXL-9cgPmAJfwcyRmv-19">
@@ -191,7 +191,7 @@
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-1" value="" style="group" vertex="1" connectable="0" parent="1">
           <mxGeometry x="255" y="131" width="840" height="570" as="geometry" />
         </mxCell>
-        <mxCell id="mnQk-e2eJ09kS2U4eIUH-2" value="Thread 1" style="swimlane;whiteSpace=wrap" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-1">
+        <mxCell id="mnQk-e2eJ09kS2U4eIUH-2" value="Operador Almacén" style="swimlane;whiteSpace=wrap" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-1">
           <mxGeometry width="280" height="570" as="geometry" />
         </mxCell>
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-3" value="" style="ellipse;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-2">
@@ -329,6 +329,9 @@
         </mxCell>
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-36" value="" style="endArrow=open;strokeColor=#FF0000;endFill=1;rounded=0" edge="1" parent="mnQk-e2eJ09kS2U4eIUH-1" source="mnQk-e2eJ09kS2U4eIUH-8" target="mnQk-e2eJ09kS2U4eIUH-17">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ja3pm5oiSuWhzg5xy4gj-1" value="&#xa;&#xa;&#xa;&lt;ol type=&quot;1&quot; start=&quot;1&quot;&gt;&#xa; &lt;li style=&quot;mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;&#xa;     line-height:normal;mso-list:l0 level1 lfo1;tab-stops:list 36.0pt&quot; class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;ES-CO&quot;&gt;El operador accede al módulo de productos.&lt;/span&gt;&lt;/li&gt;&#xa; &lt;li style=&quot;mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;&#xa;     line-height:normal;mso-list:l0 level1 lfo1;tab-stops:list 36.0pt&quot; class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;ES-CO&quot;&gt;Visualiza la lista actual.&lt;/span&gt;&lt;/li&gt;&#xa; &lt;li style=&quot;mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;&#xa;     line-height:normal;mso-list:l0 level1 lfo1;tab-stops:list 36.0pt&quot; class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;ES-CO&quot;&gt;Puede registrar, editar o eliminar productos.&lt;/span&gt;&lt;/li&gt;&#xa; &lt;li style=&quot;mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;&#xa;     line-height:normal;mso-list:l0 level1 lfo1;tab-stops:list 36.0pt&quot; class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;ES-CO&quot;&gt;El sistema valida los campos obligatorios.&lt;/span&gt;&lt;/li&gt;&#xa; &lt;li style=&quot;mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;&#xa;     line-height:normal;mso-list:l0 level1 lfo1;tab-stops:list 36.0pt&quot; class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;ES-CO&quot;&gt;Se confirma la operación y se actualiza el inventario.&lt;/span&gt;&lt;/li&gt;&#xa;&lt;/ol&gt;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="111" y="404" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
