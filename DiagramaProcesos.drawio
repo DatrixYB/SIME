@@ -184,7 +184,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="JLT5EOWbu2_unH0VoCmM" name="Página-3">
-    <mxGraphModel dx="1189" dy="514" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="235" dy="102" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -211,7 +211,7 @@
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-7" value="" style="endArrow=open;strokeColor=#FF0000;endFill=1;rounded=0" edge="1" parent="mnQk-e2eJ09kS2U4eIUH-2" source="mnQk-e2eJ09kS2U4eIUH-5" target="mnQk-e2eJ09kS2U4eIUH-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mnQk-e2eJ09kS2U4eIUH-8" value="Consultas CRUD" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-2">
+        <mxCell id="mnQk-e2eJ09kS2U4eIUH-8" value="Formularios  CRUD" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-2">
           <mxGeometry x="60" y="325" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-9" value="" style="endArrow=open;strokeColor=#FF0000;endFill=1;rounded=0" edge="1" parent="mnQk-e2eJ09kS2U4eIUH-2" source="mnQk-e2eJ09kS2U4eIUH-6" target="mnQk-e2eJ09kS2U4eIUH-8">
@@ -227,7 +227,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-1" value="Autenticación&#xa;rol" style="shape=note;whiteSpace=wrap;size=17" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-2">
-          <mxGeometry x="177" y="61" width="85" height="41" as="geometry" />
+          <mxGeometry x="175" y="59" width="101" height="51" as="geometry" />
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-2" value="" style="endArrow=none;strokeColor=#FF0000;endFill=0;rounded=0;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="mnQk-e2eJ09kS2U4eIUH-2" source="rLn4Sj_fgA7SqJmoeYEY-1" target="mnQk-e2eJ09kS2U4eIUH-5">
           <mxGeometry relative="1" as="geometry">
@@ -246,7 +246,7 @@
             <mxPoint x="55" y="90" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="mnQk-e2eJ09kS2U4eIUH-14" value="idle" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
+        <mxCell id="mnQk-e2eJ09kS2U4eIUH-14" value="idle-actualizado" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
           <mxGeometry x="20" y="110" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-15" value="Verifica informacion" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
@@ -255,13 +255,13 @@
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-16" value="" style="endArrow=open;strokeColor=#FF0000;endFill=1;rounded=0" edge="1" parent="mnQk-e2eJ09kS2U4eIUH-11" source="mnQk-e2eJ09kS2U4eIUH-14" target="mnQk-e2eJ09kS2U4eIUH-15">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mnQk-e2eJ09kS2U4eIUH-17" value="comandos" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
+        <mxCell id="mnQk-e2eJ09kS2U4eIUH-17" value="comandos REST" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
           <mxGeometry x="20" y="325" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-18" value="" style="endArrow=open;strokeColor=#FF0000;endFill=1;rounded=0" edge="1" parent="mnQk-e2eJ09kS2U4eIUH-11" source="mnQk-e2eJ09kS2U4eIUH-15" target="mnQk-e2eJ09kS2U4eIUH-17">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mnQk-e2eJ09kS2U4eIUH-19" value="queue empty" style="rhombus;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
+        <mxCell id="mnQk-e2eJ09kS2U4eIUH-19" value="consulta ok" style="rhombus;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
           <mxGeometry x="150" y="225" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-20" value="yes" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#FF0000;exitX=0.5;exitY=0;endFill=1;rounded=0;entryX=0.75;entryY=0.5;entryPerimeter=0" edge="1" parent="mnQk-e2eJ09kS2U4eIUH-11" source="mnQk-e2eJ09kS2U4eIUH-19" target="mnQk-e2eJ09kS2U4eIUH-23">
