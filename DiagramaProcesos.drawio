@@ -93,6 +93,9 @@
         <mxCell id="eNaXL-9cgPmAJfwcyRmv-42" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="eNaXL-9cgPmAJfwcyRmv-3" target="eNaXL-9cgPmAJfwcyRmv-20">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="tcPPATNTlsftu_3hCiL_-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="eNaXL-9cgPmAJfwcyRmv-3" target="eNaXL-9cgPmAJfwcyRmv-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="eNaXL-9cgPmAJfwcyRmv-3" value="Operador Almacen" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
           <mxGeometry x="58" y="425" width="30" height="60" as="geometry" />
         </mxCell>
