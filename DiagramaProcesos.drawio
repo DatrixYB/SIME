@@ -1104,13 +1104,13 @@
           <mxGeometry x="1674" y="71" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-245" value="DA-SIME-004" style="label;whiteSpace=wrap;html=1;image=img/clipart/Gear_128x128.png" vertex="1" parent="1">
-          <mxGeometry x="2530" y="55" width="140" height="60" as="geometry" />
+          <mxGeometry x="2504" y="59" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-246" value="DA-SIME-005" style="label;whiteSpace=wrap;html=1;image=img/clipart/Gear_128x128.png" vertex="1" parent="1">
           <mxGeometry x="3333" y="55" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="rLn4Sj_fgA7SqJmoeYEY-247" value="DA-SIME-006" style="label;whiteSpace=wrap;html=1;image=img/clipart/Gear_128x128.png" vertex="1" parent="1">
-          <mxGeometry x="4170" y="50" width="140" height="60" as="geometry" />
+          <mxGeometry x="4163" y="59" width="140" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
