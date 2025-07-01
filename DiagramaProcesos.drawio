@@ -202,7 +202,7 @@
             <mxPoint x="107.7440476190476" y="103.05263157894737" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="mnQk-e2eJ09kS2U4eIUH-5" value="idle- Productos" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-2">
+        <mxCell id="mnQk-e2eJ09kS2U4eIUH-5" value="GUI- Productos" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-2">
           <mxGeometry x="56.21428571428571" y="103.05263157894737" width="103.0595238095238" height="46.8421052631579" as="geometry" />
         </mxCell>
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-6" value="Visualiza productos" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-2">
@@ -246,7 +246,7 @@
             <mxPoint x="51.5297619047619" y="84.31578947368422" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="mnQk-e2eJ09kS2U4eIUH-14" value="idle-actualizado" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
+        <mxCell id="mnQk-e2eJ09kS2U4eIUH-14" value="GUI-actualizado" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
           <mxGeometry x="18.738095238095237" y="103.05263157894737" width="103.0595238095238" height="46.8421052631579" as="geometry" />
         </mxCell>
         <mxCell id="mnQk-e2eJ09kS2U4eIUH-15" value="Verifica informacion&#xa;Modifica Productos" style="" vertex="1" parent="mnQk-e2eJ09kS2U4eIUH-11">
