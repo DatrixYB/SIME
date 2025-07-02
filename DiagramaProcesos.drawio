@@ -93,9 +93,6 @@
         <mxCell id="eNaXL-9cgPmAJfwcyRmv-42" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="eNaXL-9cgPmAJfwcyRmv-3" target="eNaXL-9cgPmAJfwcyRmv-20" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="tcPPATNTlsftu_3hCiL_-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="eNaXL-9cgPmAJfwcyRmv-3" target="eNaXL-9cgPmAJfwcyRmv-14" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="eNaXL-9cgPmAJfwcyRmv-3" value="Operador Almacén" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
           <mxGeometry x="58" y="425" width="30" height="60" as="geometry" />
         </mxCell>
@@ -117,7 +114,7 @@
         <mxCell id="eNaXL-9cgPmAJfwcyRmv-35" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="eNaXL-9cgPmAJfwcyRmv-5" target="eNaXL-9cgPmAJfwcyRmv-20" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TDy8qt8q_wOtJDcx3cEp-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="eNaXL-9cgPmAJfwcyRmv-5" target="eNaXL-9cgPmAJfwcyRmv-6">
+        <mxCell id="TDy8qt8q_wOtJDcx3cEp-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="eNaXL-9cgPmAJfwcyRmv-5" target="eNaXL-9cgPmAJfwcyRmv-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="eNaXL-9cgPmAJfwcyRmv-5" value="Operador POS" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
