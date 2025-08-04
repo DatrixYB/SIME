@@ -14,10 +14,11 @@ import {
 import { CreateSaleItemDto } from './dto/create-sale-item.dto';
 import { UpdateSaleItemDto } from './dto/update-sale-item.dto';
 import { SaleItemService } from './sale-item.service';
+import { CreateSaleOrderIDto } from './dto/create-saleorder-item.dto';
 
 @Controller('sale-item')
 export class SaleItemController {
-  constructor(private readonly saleItemService: SaleItemService) {}
+  constructor(private readonly saleItemService: SaleItemService) { }
 
   /**
    * Crea un nuevo usuario. Valida con class-validator.
@@ -27,7 +28,13 @@ export class SaleItemController {
   async create(@Body() createSaleItemDto: CreateSaleItemDto) {
     return this.saleItemService.create(createSaleItemDto);
   }
+  @Post('bulk')
+  async createMany(@Body() dto: CreateSaleOrderIDto) {
 
+    return this.saleItemService.createSaleOrderItems(
+      dto
+    );
+  }
   /**
    * Devuelve todos los usuarios (campos seguros).
    */

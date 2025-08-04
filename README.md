@@ -47,6 +47,10 @@ $ npm run start:prod
 
 ## Test
 
+## DataBase Seed
+```bash
+npx ts-node prisma/seed.ts
+```
 ```bash
 # unit tests
 $ npm run test

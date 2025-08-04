@@ -1,7 +1,7 @@
 // import { PrismaClient } from '@prisma/client'
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import { PrismaClient } from 'generated/prisma/client';
-// import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from 'generated/prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 // src/prisma/prisma.service.ts
 

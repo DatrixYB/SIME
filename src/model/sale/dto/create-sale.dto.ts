@@ -1,19 +1,31 @@
 // src/sales/dto/create-sale.dto.ts
-import { IsNumber, IsDateString, IsInt } from 'class-validator';
+import { OrderStatus } from '@prisma/client';
+import {IsEnum, IsNumber, IsDateString, IsInt, IsOptional, IsPositive } from 'class-validator';
 
 export class CreateSaleDto {
   @IsDateString()
+  @IsOptional()
   date: string;
 
   @IsNumber()
   total: number;
 
-  @IsInt()
+  // @IsInt()
+  @IsPositive()
   clientId: number;
 
-  @IsInt()
+  // @IsInt()
+  @IsPositive()
   userId: number;
 
-  @IsInt()
+  // @IsInt()
+    @IsPositive()
   paymentId: number;
+
+  // @IsInt()
+  @IsPositive()
+  orden: number;
+
+  @IsEnum(OrderStatus)
+  status: OrderStatus
 }

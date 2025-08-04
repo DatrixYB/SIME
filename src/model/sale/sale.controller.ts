@@ -14,8 +14,9 @@ import {
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
 import { SaleService } from './sale.service';
+// import {}
 
-@Controller('sale')
+@Controller('sales')
 export class SaleController {
   constructor(private readonly saleService: SaleService) {}
 
@@ -23,8 +24,9 @@ export class SaleController {
    * Crea un nuevo usuario. Valida con class-validator.
    */
   @Post()
-  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  // @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async create(@Body() createSaleDto: CreateSaleDto) {
+    console.log('createSaleDto', createSaleDto);
     return this.saleService.create(createSaleDto);
   }
 
@@ -33,6 +35,7 @@ export class SaleController {
    */
   @Get()
   async findAll() {
+    return this.saleService.findAllWithRelations();
     return this.saleService.findAll();
   }
 

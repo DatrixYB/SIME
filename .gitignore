@@ -56,3 +56,13 @@ pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 /generated/prisma
+# Prisma
+prisma/dev.db
+prisma/dev.sqlite
+prisma/.env
+prisma/migrations/**/README.md
+prisma/generated/
+# Solo si no versionás migraciones
+prisma/migrations/
+
+# General para entornos Node.js

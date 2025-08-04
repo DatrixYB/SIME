@@ -1,28 +1,28 @@
-// import { PartialType } from '@nestjs/mapped-types';
-// import { CreateUserDto } from './create-user.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateUserDto } from './create-user.dto';
 
-// export class UpdateUserDto extends PartialType(CreateUserDto) {}
+export class UpdateUserDto extends PartialType(CreateUserDto) {}
 
-import {
-  IsEmail,
-  IsEnum,
-  IsOptional,
-  IsString,
-  MinLength,
-} from 'class-validator';
-import { UserRole } from '@prisma/client';
+// import {
+//   IsEmail,
+//   IsEnum,
+//   IsOptional,
+//   IsString,
+//   MinLength,
+// } from 'class-validator';
+// import { UserRole } from '@prisma/client';
 
-export class UpdateUserDto {
-  @IsOptional()
-  @IsEmail()
-  email?: string;
+// export class UpdateUserDto {
+//   @IsOptional()
+//   @IsEmail()
+//   email?: string;
 
-  @IsOptional()
-  @IsString()
-  @MinLength(6)
-  password?: string;
+//   @IsOptional()
+//   @IsString()
+//   @MinLength(6)
+//   password?: string;
 
-  @IsOptional()
-  @IsEnum(UserRole)
-  role?: UserRole;
-}
+//   @IsOptional()
+//   @IsEnum(UserRole)
+//   role?: UserRole;
+// }

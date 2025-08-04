@@ -1,69 +1,144 @@
 // client.service.ts
+
+import { CreateSaleDto } from './dto/create-sale.dto';
+import { UpdateSaleDto } from './dto/update-sale.dto';
+
 import {
   Injectable,
   NotFoundException,
+  // ConflictException,
   InternalServerErrorException,
+  BadRequestException,
 } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-import { CreateSaleDto } from './dto/create-sale.dto';
-import { UpdateSaleDto } from './dto/update-sale.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class SaleService {
   constructor(private readonly prisma: PrismaService) {}
-  Name = 'saleService';
-  async create(dto: CreateSaleDto) {
+
+  async create(createSaleorderDto: CreateSaleDto) {
     try {
-      return await this.prisma.sale.create({ data: dto });
+      // Map DTO to Prisma input type
+
+      const { clientId, userId, paymentId, ...rest } = createSaleorderDto;
+            const existingUser = await this.prisma.user.findUnique({
+  where: { id: userId },
+});
+
+if (!existingUser) {
+  throw new BadRequestException(`Usuario con ID ${userId} no encontrado`);
+}
+      const saleData: any = {
+        ...rest,
+        client: clientId ? { connect: { id: clientId } } : undefined,
+        user: userId ? { connect: { id: userId } } : undefined,
+        payment: paymentId ? { connect: { id: paymentId } } : undefined,
+        // Add other relations if needed, e.g. items
+      };
+      return await this.prisma.sale.create({ data: saleData });
     } catch (error) {
-      throw new InternalServerErrorException(`Error al crear el ${this.Name}'`);
+      throw new InternalServerErrorException(
+        `Error al crear el Sale order: ${error.message}`,
+      );
     }
+  }
+  private async ensureExists(id: number) {
+    const saleOrder = await this.prisma.sale.findUnique({
+      where: { id },
+    });
+    if (!saleOrder) throw new NotFoundException('Order not found');
+    return saleOrder;
   }
 
   async findAll() {
-    try {
-      return await this.prisma.sale.findMany({
-        orderBy: { date: 'desc' },
-      });
-    } catch (error) {
-      throw new InternalServerErrorException(
-        `Error en el ${this.Name} findAll`,
-      );
-    }
+    return await this.prisma.sale.findMany();
   }
 
   async findOne(id: number) {
-    const client = await this.prisma.sale.findUnique({ where: { id } });
-    if (!client) {
-      throw new NotFoundException(
-        `Error en el ${this.Name} findOne:  no encontrado`,
-      );
-    }
-    return client;
+     const saleOrder = await this.prisma.sale.findUnique({
+      where: { id },
+
+      include: {
+        // client: true,
+        // user: true,
+        // payment: true,
+        items: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
+    if (!saleOrder) throw new NotFoundException('Order not found');
+
+    // return saleOrder
+    return {
+      id: saleOrder.id,
+      product: saleOrder.items.map(item => ({name: item.product.name, quantity: item.quantity, price: item.price})),
+      // quantity: ,
+      // totalItems: saleOrder.items.reduce((sum, item) => sum + item.quantity, 0),
+      total: saleOrder.total,
+      // paymentMethod: saleOrder.payment.method,
+      // statusPayment: saleOrder.payment.status,
+      statusSale: saleOrder.status,
+    };
+  
   }
 
-  async update(id: number, dto: UpdateSaleDto) {
-    try {
-      const foundByid = await this.prisma.sale.findUnique({ where: { id } });
-      console.log('foundByid', foundByid);
-      if (dto && foundByid !== null) {
-        return await this.prisma.sale.update({
-          where: { id },
-          data: dto,
-        });
-      }
-    } catch (error) {
-      throw new NotFoundException(
-        `Error en el ${this.Name} update: saleo no update`,
-      );
+  async update(id: number, updatePurchaseorderDto: UpdateSaleDto) {
+    const exist = await this.ensureExists(id);
+    if (!exist) {
+      throw new NotFoundException('Purchase order not found');
     }
+    const { clientId, userId, paymentId, ...rest } = updatePurchaseorderDto;
+    const updateData: any = {
+      ...rest,
+      ...(clientId !== undefined && { client: { connect: { id: clientId } } }),
+      ...(userId !== undefined && { user: { connect: { id: userId } } }),
+      ...(paymentId !== undefined && { payment: { connect: { id: paymentId } } }),
+    };
+    return this.prisma.sale.update({
+      where: { id },
+      data: updateData,
+    });
   }
 
   async remove(id: number) {
+    await this.ensureExists(id);
+    return this.prisma.sale.delete({ where: { id } });
+  }
+
+  async findAllWithRelations() {
     try {
-      return await this.prisma.sale.delete({ where: { id } });
+   
+const sales = await this.prisma.sale.findMany({
+  where: {
+    // payment: { status: 'COMPLETED' },
+    // status: { not: 'PAID' }, // evitamos actualizar redundante
+  },
+  include: {
+    client: true,
+    payment: true,
+    items: true,
+  },
+  orderBy: { date: 'desc' },
+});
+
+return sales.map((sale) => ({
+  id: sale.id,
+  client: sale.client.name,
+  date: sale.date,
+  totalItems: sale.items.reduce((sum, item) => sum + item.quantity, 0),
+  total: sale.total,
+  paymentMethod: sale.payment.method,
+  statusPayment: sale.payment.status,
+  statusSale: sale.status, // reflejamos cambio en respuesta
+}));
+
     } catch (error) {
-      throw new NotFoundException(`Error el ${this.Name} remove: `);
+      throw new InternalServerErrorException(
+        `Error en el ${error} findAllWithRelations`,
+      );
     }
   }
 }

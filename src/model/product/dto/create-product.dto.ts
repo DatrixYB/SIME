@@ -5,11 +5,17 @@ import {
   IsNumber,
   IsBoolean,
   Min,
+  IsInt,
+  IsPositive,
 } from 'class-validator';
 
 export class CreateProductDto {
   @IsString()
   name: string;
+
+  @IsString()
+  @IsOptional()
+  image: string;
 
   @IsNumber()
   @Min(0)
@@ -19,6 +25,10 @@ export class CreateProductDto {
   @Min(0)
   stock: number;
 
+  @IsNumber()
+  @Min(0)
+  minStock: number;
+
   @IsOptional()
   @IsString()
   description?: string;
@@ -26,4 +36,11 @@ export class CreateProductDto {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @IsInt()
+  @IsPositive()
+  categoryId: number;
+  @IsInt()
+  @IsPositive()
+  supplierId: number;
 }

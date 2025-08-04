@@ -18,7 +18,7 @@ export class UserService {
    * Crea un nuevo usuario después de verificar duplicidad y aplicar hash a la contraseña.
    */
   async create(dto: CreateUserDto): Promise<Omit<User, 'password'>> {
-    const { email, password, role } = dto;
+    const { email, password, role,image ,name} = dto;
 
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
@@ -31,7 +31,7 @@ export class UserService {
 
     try {
       const user = await this.prisma.user.create({
-        data: { email, password: hashedPassword, role },
+        data: { email, password: hashedPassword, role,image,name },
       });
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -57,6 +57,8 @@ export class UserService {
           role: true,
           createdAt: true,
           updatedAt: true,
+          image: true,
+          name:true
         },
         orderBy: { createdAt: 'desc' },
       });
@@ -80,6 +82,8 @@ export class UserService {
         role: true,
         createdAt: true,
         updatedAt: true,
+        image: true,
+        name:true
       },
     });
 

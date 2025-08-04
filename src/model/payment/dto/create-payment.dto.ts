@@ -6,16 +6,19 @@ import {
   IsDateString,
   IsNumber,
 } from 'class-validator';
-import { PaymentType } from '@prisma/client';
+import { PaymentStatus, PaymentType } from '@prisma/client';
 export class CreatePaymentDto {
   @IsEnum(PaymentType)
   method: PaymentType;
+  @IsEnum(PaymentStatus)
+  status: PaymentStatus;
 
   @IsOptional()
   @IsString()
   reference?: string;
 
   @IsDateString()
+  @IsOptional()
   paidAt: string;
 
   @IsNumber()

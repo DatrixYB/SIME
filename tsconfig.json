@@ -18,8 +18,13 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@prisma/*": ["generated/prisma/*"]
+      // "@prisma/*": ["generated/prisma/*"]
+      //  "@prisma/*": ["prisma/generated/prisma/*"]
+
     }
 
-  }
+  },
+  // "include": ["src/**/*","prisma/**/*"],
+   "include": ["src", "prisma"]
+
 }

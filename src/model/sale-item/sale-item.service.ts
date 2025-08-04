@@ -7,17 +7,46 @@ import {
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateSaleItemDto } from './dto/create-sale-item.dto';
 import { UpdateSaleItemDto } from './dto/update-sale-item.dto';
-
+import { CreateSaleOrderIDto } from './dto/create-saleorder-item.dto';
 @Injectable()
 export class SaleItemService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
   Name = 'saleItemService';
   async create(dto: CreateSaleItemDto) {
     try {
-      return await this.prisma.saleItem.create({ data: dto });
+
+
+      const saleI = await this.prisma.$transaction(async (tx) => {
+        const saleI = await tx.saleItem.create({ data: dto });
+
+        await tx.product.update({
+          where: { id: dto.productId },
+          data: {
+            stock: {
+              decrement: dto.quantity,
+            },
+          },
+        });
+        return saleI;
+      });
+      return saleI;
     } catch (error) {
       throw new InternalServerErrorException(`Error al crear el ${this.Name}'`);
     }
+  }
+  async createSaleOrderItems(dto: CreateSaleOrderIDto) {
+    const { saleId, items } = dto;
+
+    return Promise.all(
+      items.map(item => this.prisma.saleItem.create({
+        data: {
+          saleId: saleId,
+          productId: item.productId,
+          quantity: item.quantity,
+          price: item.price,
+        },
+      }))
+    );
   }
 
   async findAll() {

@@ -10,6 +10,10 @@ import { ProductModule } from './model/product/product.module';
 import { SaleModule } from './model/sale/sale.module';
 import { SaleItemModule } from './model/sale-item/sale-item.module';
 import { PaymentModule } from './model/payment/payment.module';
+import { SupplierModule } from './model/supplier/supplier.module';
+import { CategoryModule } from './model/category/category.module';
+import { PurchaseorderModule } from './model/purchaseorder/purchaseorder.module';
+import { PurchaseorderItemModule } from './model/purchaseorder-item/purchaseorder-item.module';
 
 @Module({
   imports: [
@@ -23,6 +27,10 @@ import { PaymentModule } from './model/payment/payment.module';
     SaleModule,
     SaleItemModule,
     PaymentModule,
+    SupplierModule,
+    CategoryModule,
+    PurchaseorderModule,
+    PurchaseorderItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],
