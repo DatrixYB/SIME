@@ -1,103 +1,265 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Play } from "lucide-react"
 
-export default function Home() {
+export default function Component() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="flex items-center justify-between px-6 py-4 border-b border-[#e5e5e5]">
+        <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-[#18a0fb] rounded flex items-center justify-center">
+              <span className="text-white font-bold text-sm">S</span>
+            </div>
+            <span className="font-bold text-lg">SIME</span>
+          </div>
+          <nav className="hidden md:flex space-x-6">
+            <a href="#" className="text-gray-600 hover:text-gray-900">
+              Home
+            </a>
+            <a href="#" className="text-gray-600 hover:text-gray-900">
+              Pricing
+            </a>
+            <a href="#" className="text-gray-600 hover:text-gray-900">
+              Community
+            </a>
+            <a href="#" className="text-gray-600 hover:text-gray-900">
+              Company
+            </a>
+          </nav>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <div className="flex items-center space-x-4">
+          <a href="#" className="text-gray-600 hover:text-gray-900">
+            Help desk
+          </a>
+          <a href="#" className="text-gray-600 hover:text-gray-900">
+            Blog
+          </a>
+          <a href="#" className="text-gray-600 hover:text-gray-900">
+            Resources
+          </a>
+          <Button className="bg-[#18a0fb] hover:bg-[#1590eb] text-white px-6">Get Started</Button>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="flex">
+        <div className="flex-1 bg-[#cccccc] relative min-h-[400px] flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-16 h-16 bg-[#18a0fb] rounded-full flex items-center justify-center mx-auto mb-8">
+              <Play className="w-6 h-6 text-white fill-white" />
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-6 max-w-md">
+              The largest community of photo enthusiasts
+            </h1>
+            <Button className="bg-[#18a0fb] hover:bg-[#1590eb] text-white px-8">Join today</Button>
+          </div>
+        </div>
+
+        {/* Sign Up Form */}
+        <div className="w-80 bg-[#f5f5f5] p-8">
+          <h2 className="text-xl font-semibold mb-2">Ready to take a free trial?</h2>
+          <p className="text-gray-600 text-sm mb-6">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+          </p>
+
+          <div className="bg-white p-6 rounded-lg shadow-sm">
+            <h3 className="font-medium mb-4">Sign up for a free account</h3>
+            <div className="space-y-4">
+              <div className="flex space-x-3">
+                <Input placeholder="First name" className="flex-1" />
+                <Input placeholder="Last name" className="flex-1" />
+              </div>
+              <Input placeholder="Email address" />
+              <Input placeholder="Phone number" />
+              <Button className="w-full bg-[#18a0fb] hover:bg-[#1590eb] text-white">Sign up</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Content Section */}
+      <section className="px-6 py-16">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-bold mb-2">Snap photos and share like never before</h2>
+
+          <div className="grid md:grid-cols-2 gap-12 mt-12">
+            <div>
+              <h3 className="font-semibold mb-3">Sed ut perspiciatis</h3>
+              <p className="text-gray-600 text-sm mb-4">
+                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est.
+              </p>
+              <Button variant="outline" className="text-[#18a0fb] border-[#18a0fb] bg-transparent">
+                Learn more
+              </Button>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3">Lorem ipsum dolor</h3>
+              <p className="text-gray-600 text-sm mb-4">
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
+                provident.
+              </p>
+              <Button variant="outline" className="text-[#18a0fb] border-[#18a0fb] bg-transparent">
+                Learn more
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 mt-12">
+            <div>
+              <h3 className="font-semibold mb-3">Nemo enim ipsum</h3>
+              <p className="text-gray-600 text-sm mb-4">
+                Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
+              </p>
+              <Button variant="outline" className="text-[#18a0fb] border-[#18a0fb] bg-transparent">
+                Learn more
+              </Button>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3">Tempor incididunt</h3>
+              <p className="text-gray-600 text-sm mb-4">
+                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
+                aliquid ex ea commodi consequatur quis autem vel eum iure reprehenderit.
+              </p>
+              <Button variant="outline" className="text-[#18a0fb] border-[#18a0fb] bg-transparent">
+                Learn more
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Image and Content Section */}
+      <section className="px-6 py-16 bg-[#f5f5f5]">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="bg-[#cccccc] h-64 rounded-lg"></div>
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Sed ut perspiciatis unde omnis</h3>
+              <p className="text-gray-600 text-sm">
+                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Another Content Section */}
+      <section className="px-6 py-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Sed ut perspiciatis unde omnis</h3>
+              <p className="text-gray-600 text-sm">
+                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem.
+              </p>
+            </div>
+            <div className="bg-[#cccccc] h-64 rounded-lg"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Company Logos Section */}
+      <section className="px-6 py-16 bg-[#f5f5f5]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-2">Youre in good company</h2>
+          <p className="text-gray-600 text-sm mb-12">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+          </p>
+
+          <div className="grid grid-cols-4 gap-8 mb-8">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="bg-[#cccccc] h-16 rounded"></div>
+            ))}
+          </div>
+
+          <div className="flex justify-center space-x-4">
+            <Button className="bg-[#18a0fb] hover:bg-[#1590eb] text-white px-8">Get Started</Button>
+            <Button variant="outline" className="text-[#18a0fb] border-[#18a0fb] bg-transparent">
+              Learn more
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom Sign Up Section */}
+      <section className="flex">
+        <div className="flex-1 px-6 py-16">
+          <p className="text-gray-600 text-sm max-w-md">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+          </p>
+        </div>
+
+        <div className="w-80 bg-[#f5f5f5] p-8">
+          <h2 className="text-xl font-semibold mb-2">Ready to take a free trial?</h2>
+          <p className="text-gray-600 text-sm mb-6">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+          </p>
+
+          <div className="bg-white p-6 rounded-lg shadow-sm">
+            <h3 className="font-medium mb-4">Log in for a account</h3>
+            <div className="space-y-4">
+              <Input placeholder="Email address" />
+              <Input placeholder="Password" type="password" />
+              <Button className="w-full bg-[#18a0fb] hover:bg-[#1590eb] text-white">Log in</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-[#e5e5e5] px-6 py-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-8">
+              <a href="#" className="text-gray-600 hover:text-gray-900">
+                Help desk
+              </a>
+              <a href="#" className="text-gray-600 hover:text-gray-900">
+                Community
+              </a>
+              <a href="#" className="text-gray-600 hover:text-gray-900">
+                Company
+              </a>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-[#18a0fb] rounded flex items-center justify-center">
+                <span className="text-white font-bold text-sm">S</span>
+              </div>
+              <span className="font-bold text-lg">SIME</span>
+            </div>
+
+            <div className="flex items-center space-x-8">
+              <a href="#" className="text-gray-600 hover:text-gray-900">
+                Help desk
+              </a>
+              <a href="#" className="text-gray-600 hover:text-gray-900">
+                Blog
+              </a>
+              <a href="#" className="text-gray-600 hover:text-gray-900">
+                Resources
+              </a>
+            </div>
+          </div>
+
+          <div className="flex justify-center space-x-2 mt-8">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="w-2 h-2 bg-[#cccccc] rounded-full"></div>
+            ))}
+          </div>
+
+          <p className="text-center text-gray-500 text-xs mt-4">© 2024 SIME. All rights reserved.</p>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
