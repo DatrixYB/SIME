@@ -274,6 +274,7 @@ const saleorder_item_payload: SaleOrderItems = {
                       <div className="flex-1">
                         <h4 className="font-medium text-sm">{item.name}</h4>
                         <p className="text-sm text-muted-foreground">${item.price.toFixed(2)} c/u</p>
+                        <p className="text-sm text-muted-foreground">${item.price} c/u</p>
                       </div>
                       <div className="flex items-center space-x-2">
                         {/* <Button variant="outline" size="sm" onClick={() => removeFromCart(item.id.toString())} disabled={item.quantity <= 1}> */}

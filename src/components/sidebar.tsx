@@ -13,12 +13,12 @@ import { useState } from "react"
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
-  { name: "Ventas", href: "/sales", icon: ShoppingCart },
-  { name: "Proveedores", href: "/suppliers", icon: Users },
-  { name: "Inventario", href: "/products", icon: Package },
-  { name: "Punto de Venta", href: "/pos", icon: Store },
-  { name: "Usuarios", href: "/profile", icon: Settings },
-  { name: "Reportes", href: "/reports", icon: BarChart3 },
+  { name: "Ventas", href: "/dashboard/sales", icon: ShoppingCart },
+  { name: "Proveedores", href: "/dashboard/suppliers", icon: Users },
+  { name: "Inventario", href: "/dashboard/products", icon: Package },
+  { name: "Punto de Venta", href: "/dashboard/pos", icon: Store },
+  { name: "Usuarios", href: "/dashboard/profile", icon: Settings },
+  { name: "Reportes", href: "/dashboard/reports", icon: BarChart3 },
   // { name: "Facturas", href: "/invoices", icon: FileText },
 ]
 

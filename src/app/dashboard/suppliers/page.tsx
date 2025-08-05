@@ -13,41 +13,7 @@ import Link from "next/link"
 import AddSupplierDialog from "@/components/supplier/AddSupplierDialog"
 
 export default function SuppliersPage() {
-  // const [suppliers, setSuppliers] = useState<Supplier[]>([
-  //   {
-  //     id: "1",
-  //     name: "Tech Distributor SA",
-  //     contact: "Juan Pérez",
-  //     email: "juan@techdist.com",
-  //     phone: "+52 55 1234-5678",
-  //     address: "Av. Tecnología 123, CDMX",
-  //     category: "Electrónicos",
-  //     status: "active",
-  //     productsCount: 45,
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Office Supplies Co",
-  //     contact: "María González",
-  //     email: "maria@officesupplies.com",
-  //     phone: "+52 55 8765-4321",
-  //     address: "Calle Oficina 456, Guadalajara",
-  //     category: "Oficina",
-  //     status: "active",
-  //     productsCount: 23,
-  //   },
-  //   {
-  //     id: "3",
-  //     name: "Gaming Gear Ltd",
-  //     contact: "Carlos Rodríguez",
-  //     email: "carlos@gaminggear.com",
-  //     phone: "+52 81 9876-5432",
-  //     address: "Blvd. Gaming 789, Monterrey",
-  //     category: "Gaming",
-  //     status: "active",
-  //     productsCount: 18,
-  //   },
-  // ])
+
   const [suppliers, setSuppliers] = useState<Supplier[]>([])
    
   useEffect(() => {
@@ -118,7 +84,7 @@ export default function SuppliersPage() {
           <h1 className="text-3xl font-bold tracking-tight">Proveedores</h1>
           <p className="text-muted-foreground">Gestiona tus proveedores y contactos comerciales</p>
         </div>
-        <Link href="/suppliers/new">
+        <Link href="./suppliers/new">
   <Button>
     <Plus className="mr-2 h-4 w-4" />
     Agregar Proveedor

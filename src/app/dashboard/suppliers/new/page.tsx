@@ -52,7 +52,7 @@ export default function SupplierForm() {
     // Aquí enviarías a backend
       try {
     await createSupplier(productPayload);
-    router.push("/suppliers");
+    router.push("./");
 
   } catch (err) {
     console.error(err);
@@ -64,7 +64,7 @@ export default function SupplierForm() {
     <form className="flex flex-col gap-6 px-6 py-5 lg:flex-row" onSubmit={submitProduct}>
       {/* Formulario principal */}
       <section className="w-full max-w-md flex flex-col gap-4">
-            <Link href="/suppliers">
+            <Link href="./">
           <Button>
             <MoveLeft className="mr-2 h-4 w-4" />
             Volver

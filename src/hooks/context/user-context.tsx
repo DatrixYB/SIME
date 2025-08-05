@@ -19,7 +19,7 @@ useEffect(() => {
   const fetchUser = async () => {
     try {
     //   const res = await fetch('/api/me'); // debe devolver el usuario basado en el token
-      const res =  await getUserById(115)
+      const res =  await getUserById(118)
     //   alert(JSON.stringify(res))
     const storedUser = localStorage.getItem('user');
     if (storedUser) setUser(JSON.parse(storedUser));

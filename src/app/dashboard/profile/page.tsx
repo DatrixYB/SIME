@@ -72,7 +72,7 @@ export default function ProfilePage() {
           <p className="text-muted-foreground">Listado de todos los usuarios del sistema</p>
         </div>
         <div>
-    <Link href="/profile/new">
+    <Link href="./profile/new">
   <Button>
     <Plus className="mr-2 h-4 w-4" />
     Agregar Usuario

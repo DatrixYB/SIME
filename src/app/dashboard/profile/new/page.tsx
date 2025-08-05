@@ -69,7 +69,7 @@ export default function UserForm() {
     // Aquí enviarías a backend
     try {
       await createUser(userPayload);
-      router.push('/profile')
+      router.push('./')
     } catch (err) {
       console.error(err);
     }
@@ -90,7 +90,7 @@ export default function UserForm() {
     >
       {/* Formulario */}
       <section className="w-full max-w-md flex flex-col gap-6">
-        <Link href="/profile">
+        <Link href="./">
           <Button variant="outline" className="gap-2">
             <ArrowLeft className="h-4 w-4" />
             Volver

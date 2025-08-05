@@ -381,7 +381,7 @@ const purchaseorder_item_payload = {
       {/* Formulario principal */}
       {/* Proveedor */}
       <section className="w-full max-w-md flex flex-col gap-4">
-        <Link href="/products">
+        <Link href="./">
           <Button>
             <MoveLeft className="mr-2 h-4 w-4" />
             Volver

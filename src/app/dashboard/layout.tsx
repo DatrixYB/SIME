@@ -2,7 +2,7 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "./../globals.css";
 
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
@@ -38,14 +38,14 @@ export default function RootLayout({
         >
           <div className="flex h-screen overflow-hidden">
             {/* Sidebar fija */}
-            {/* <Sidebar /> */}
+            <Sidebar />
 
             {/* Contenido principal */}
             <div className="flex-1 flex flex-col">
-              {/* <Header /> */}
+              <Header />
               <main className="flex-1 overflow-x-hidden overflow-y-auto p-6 bg-sand-1">
                 {/* {children} */}
-                  {children}
+                  <UserProvider>{children}</UserProvider>
 
               </main>
             </div>
