@@ -14,7 +14,9 @@ async function bootstrap() {
     credentials: true,
   });
   app.enableShutdownHooks();
-  await app.listen(3001);
+  const port = process.env.PORT || 3001;
+  await app.listen(port);
+  console.log(`Server is running on port ${port}`);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

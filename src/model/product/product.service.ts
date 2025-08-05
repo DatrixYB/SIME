@@ -62,6 +62,7 @@ async findAll() {
   name: product.name,
   price: product.price,
   stock: product.stock,
+  minStock: product.minStock,
   image: product.image,
   category: product.category.name, // ✅ ¡Aquí está el nombre directamente!
   supplier: product.supplier.name
