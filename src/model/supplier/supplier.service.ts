@@ -1,11 +1,15 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
 
 @Injectable()
 export class SupplierService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: CreateSupplierDto) {
     // Verifica duplicados por nombre o email
@@ -15,7 +19,9 @@ export class SupplierService {
       },
     });
     if (existing) {
-      throw new ConflictException('Ya existe un proveedor con ese nombre o email');
+      throw new ConflictException(
+        'Ya existe un proveedor con ese nombre o email',
+      );
     }
 
     return this.prisma.supplier.create({ data: dto });
@@ -26,17 +32,20 @@ export class SupplierService {
         orders: {
           include: {
             items: {
-              select: { quantity: true }
-            }
-          }
-        }
-      }
+              select: { quantity: true },
+            },
+          },
+        },
+      },
     });
     // return suppliers
 
-    const formatted = suppliers.map(supplier => {
+    const formatted = suppliers.map((supplier) => {
       const totalProducts = supplier.orders.reduce((sum, order) => {
-        const orderTotal = order.items.reduce((subSum, item) => subSum + item.quantity, 0);
+        const orderTotal = order.items.reduce(
+          (subSum, item) => subSum + item.quantity,
+          0,
+        );
         return sum + orderTotal;
       }, 0);
       return {
@@ -47,10 +56,10 @@ export class SupplierService {
         phone: supplier.phone,
         email: supplier.email,
         totalProducts,
-      }
-    })
+      };
+    });
     return formatted;
-  };
+  }
   async findAllProduct() {
     // Devuelve todos los proveedores con sus pedidos y productos
     const suppliers = this.prisma.supplier.findMany();
@@ -64,10 +73,11 @@ export class SupplierService {
         },
       },
     });
-    const formatted = result.map(order => {
+    console.log(suppliers);
+    const formatted = result.map((order) => {
       const totalProducts = order.items.reduce(
         (sum, item) => sum + item.quantity,
-        0
+        0,
       );
 
       return {
@@ -105,5 +115,28 @@ export class SupplierService {
     const supplier = await this.prisma.supplier.findUnique({ where: { id } });
     if (!supplier) throw new NotFoundException('Proveedor no encontrado');
   }
-
+  // src/suppliers/suppliers.service.ts
+  async getTopSuppliers() {
+    const limit = 3;
+    const rawResult = await this.prisma.$queryRaw<
+      { name: string; orders: bigint; amount: number }[]
+    >`
+    SELECT 
+      s.name,
+      COUNT(o.id) AS orders,
+      SUM(o.total) AS amount
+    FROM purchaseorder o
+    JOIN supplier s ON s.id = o.supplierId
+    GROUP BY s.name
+    ORDER BY amount DESC
+    LIMIT ${limit}
+  `;
+    const result = rawResult.map((r) => ({
+      orders: Number(r.orders),
+      name: String(r.name),
+      total: Number(r.amount),
+    }));
+    console.error(result);
+    return result;
+  }
 }

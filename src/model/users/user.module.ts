@@ -5,5 +5,6 @@ import { UserController } from './user.controller';
 @Module({
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService], // si AuthModule necesita inyectarlo
 })
 export class UserModule {}

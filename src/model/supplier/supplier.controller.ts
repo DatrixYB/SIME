@@ -24,13 +24,16 @@ export class SupplierController {
   async create(@Body() dto: CreateSupplierDto) {
     return this.supplierService.create(dto);
   }
-
+  @Get('top')
+  async getTopSuppliers() {
+    return this.supplierService.getTopSuppliers();
+  }
   @Get()
   // @ApiOperation({ summary: 'Listar todos los proveedores' })
   async findAll() {
     return this.supplierService.findAll();
   }
-    @Get()
+  @Get()
   // @ApiOperation({ summary: 'Listar todos los proveedores' })
   async findSuppliers() {
     return this.supplierService.findAll();
@@ -50,9 +53,9 @@ export class SupplierController {
   @Patch(':id')
   // @ApiOperation({ summary: 'Actualizar proveedor por ID' })
   async update(@Param('id') id: string, @Body() dto: UpdateSupplierDto) {
-    console.log("Updating supplier with ID:", id);
+    // console.log("Updating supplier with ID:", id);
     const supplier = await this.findOne(id);
-    console.log("Updating supplier:", supplier);
+    console.log('Updating supplier:', supplier);
     return this.supplierService.update(Number(id), dto);
     // return dto;
   }
@@ -60,7 +63,7 @@ export class SupplierController {
   @Delete(':id')
   // @ApiOperation({ summary: 'Eliminar proveedor por ID' })
   async remove(@Param('id') id: string) {
-    const supplier = await this.findOne(id); 
+    const supplier = await this.findOne(id);
     return this.supplierService.remove(supplier.id);
   }
 }

@@ -43,6 +43,18 @@ export class ProductController {
   async findAll() {
     return this.productService.findAll();
   }
+  @Get('top')
+  async productsTop() {
+    // console.log("TOP");
+    return this.productService.getTopSellingProducts();
+  }
+  /**
+   * Devuelve todos los 5 productos con stock mas bajo (campos seguros).
+   */
+  @Get('stock-low')
+  async find_5_stock_low() {
+    return this.productService.findLowestStockProducts();
+  }
 
   /**
    * Devuelve un usuario por su ID (validación de número).

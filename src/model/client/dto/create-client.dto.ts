@@ -10,7 +10,7 @@ export class CreateClientDto {
   email?: string;
 
   @IsOptional()
-  @IsPhoneNumber()
+  // @IsPhoneNumber()
   @IsString()
   phone?: string;
 }

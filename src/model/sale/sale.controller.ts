@@ -38,6 +38,19 @@ export class SaleController {
     return this.saleService.findAllWithRelations();
     return this.saleService.findAll();
   }
+  /**
+   * Devuelve todos los usuarios (campos seguros).
+   */
+  @Get('recent')
+  async find_5LastSales() {
+    return this.saleService.findLastFiveSales();
+    return this.saleService.findAll();
+  }
+
+  @Get('mes')
+  async salesMoth() {
+    return this.saleService.getMonthlySalesData();
+  }
 
   /**
    * Devuelve un usuario por su ID (validación de número).

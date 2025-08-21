@@ -22,8 +22,9 @@ export class ClientController {
    * Crea un nuevo usuario. Valida con class-validator.
    */
   @Post()
-  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  // @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async create(@Body() createClientDto: CreateClientDto) {
+    console.log('Creating client with data:', createClientDto);
     return this.clientService.create(createClientDto);
   }
 
@@ -34,6 +35,14 @@ export class ClientController {
   async findAll() {
     return this.clientService.findAll();
   }
+    /**
+   * Devuelve el ultimo client (campos seguros).
+   */
+  @Get('last')
+  async findLast() {
+    return this.clientService.findLast();
+  }
+
 
   /**
    * Devuelve un usuario por su ID (validación de número).

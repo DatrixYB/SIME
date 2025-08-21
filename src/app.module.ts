@@ -14,6 +14,8 @@ import { SupplierModule } from './model/supplier/supplier.module';
 import { CategoryModule } from './model/category/category.module';
 import { PurchaseorderModule } from './model/purchaseorder/purchaseorder.module';
 import { PurchaseorderItemModule } from './model/purchaseorder-item/purchaseorder-item.module';
+import { AuthModule } from './auth/auth.module';
+import { StatModule } from './stat/stat.module';
 
 @Module({
   imports: [
@@ -31,6 +33,8 @@ import { PurchaseorderItemModule } from './model/purchaseorder-item/purchaseorde
     CategoryModule,
     PurchaseorderModule,
     PurchaseorderItemModule,
+    AuthModule,
+    StatModule,
   ],
   controllers: [AppController],
   providers: [AppService],

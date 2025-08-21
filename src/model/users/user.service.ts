@@ -18,7 +18,7 @@ export class UserService {
    * Crea un nuevo usuario después de verificar duplicidad y aplicar hash a la contraseña.
    */
   async create(dto: CreateUserDto): Promise<Omit<User, 'password'>> {
-    const { email, password, role,image ,name} = dto;
+    const { email, password, role,image ,name} = dto;  
 
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
@@ -133,6 +133,39 @@ export class UserService {
       );
     }
   }
+  /**
+   * Busca un usuario por ID.
+   */
+  async findUser( dto): Promise<User> {
+
+    console.log("email service", dto.email)
+    // console.log("data",dto.password)
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email: dto.email,
+        // name: dto.name,
+      },
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+        image: true,
+        name: true,
+        password: true
+      },
+    });
+
+    if (!user) {
+      console.log('Usuario no encontrado service');
+      //  `Usuario con  ${dto.email}} no encontrado`;
+      return null;
+    }
+
+    return user;
+  }
+
 
   /**
    * Elimina un usuario por ID.

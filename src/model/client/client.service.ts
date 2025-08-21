@@ -13,9 +13,11 @@ export class ClientService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: CreateClientDto) {
+    console.log('Creating client with data:', dto);
     try {
       return await this.prisma.client.create({ data: dto });
     } catch (error) {
+      console.log('Error creating client:', error);
       throw new InternalServerErrorException('Error al crear el cliente');
     }
   }
@@ -34,6 +36,15 @@ export class ClientService {
 
   async findOne(id: number) {
     const client = await this.prisma.client.findUnique({ where: { id } });
+    if (!client) {
+      throw new NotFoundException('Cliente no encontrado');
+    }
+    return client;
+  }
+    async findLast() {
+    const client = await this.prisma.client.findFirst({
+  orderBy: { createdAt: 'desc' },
+});
     if (!client) {
       throw new NotFoundException('Cliente no encontrado');
     }

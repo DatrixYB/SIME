@@ -1,5 +1,6 @@
 // client.service.ts
 
+import { Prisma } from '@prisma/client';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
 
@@ -12,6 +13,9 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
+// import { InternalSererErrorException } from '@nestjs/common';
+// import { format } from 'date-fns';
+// import { es } from 'date-fns/locale';
 @Injectable()
 export class SaleService {
   constructor(private readonly prisma: PrismaService) {}
@@ -21,13 +25,13 @@ export class SaleService {
       // Map DTO to Prisma input type
 
       const { clientId, userId, paymentId, ...rest } = createSaleorderDto;
-            const existingUser = await this.prisma.user.findUnique({
-  where: { id: userId },
-});
+      const existingUser = await this.prisma.user.findUnique({
+        where: { id: userId },
+      });
 
-if (!existingUser) {
-  throw new BadRequestException(`Usuario con ID ${userId} no encontrado`);
-}
+      if (!existingUser) {
+        throw new BadRequestException(`Usuario con ID ${userId} no encontrado`);
+      }
       const saleData: any = {
         ...rest,
         client: clientId ? { connect: { id: clientId } } : undefined,
@@ -37,6 +41,7 @@ if (!existingUser) {
       };
       return await this.prisma.sale.create({ data: saleData });
     } catch (error) {
+      console.error('Error creating sale order:', error);
       throw new InternalServerErrorException(
         `Error al crear el Sale order: ${error.message}`,
       );
@@ -55,7 +60,7 @@ if (!existingUser) {
   }
 
   async findOne(id: number) {
-     const saleOrder = await this.prisma.sale.findUnique({
+    const saleOrder = await this.prisma.sale.findUnique({
       where: { id },
 
       include: {
@@ -74,7 +79,11 @@ if (!existingUser) {
     // return saleOrder
     return {
       id: saleOrder.id,
-      product: saleOrder.items.map(item => ({name: item.product.name, quantity: item.quantity, price: item.price})),
+      product: saleOrder.items.map((item) => ({
+        name: item.product.name,
+        quantity: item.quantity,
+        price: item.price,
+      })),
       // quantity: ,
       // totalItems: saleOrder.items.reduce((sum, item) => sum + item.quantity, 0),
       total: saleOrder.total,
@@ -82,7 +91,6 @@ if (!existingUser) {
       // statusPayment: saleOrder.payment.status,
       statusSale: saleOrder.status,
     };
-  
   }
 
   async update(id: number, updatePurchaseorderDto: UpdateSaleDto) {
@@ -95,7 +103,9 @@ if (!existingUser) {
       ...rest,
       ...(clientId !== undefined && { client: { connect: { id: clientId } } }),
       ...(userId !== undefined && { user: { connect: { id: userId } } }),
-      ...(paymentId !== undefined && { payment: { connect: { id: paymentId } } }),
+      ...(paymentId !== undefined && {
+        payment: { connect: { id: paymentId } },
+      }),
     };
     return this.prisma.sale.update({
       where: { id },
@@ -110,35 +120,84 @@ if (!existingUser) {
 
   async findAllWithRelations() {
     try {
-   
-const sales = await this.prisma.sale.findMany({
-  where: {
-    // payment: { status: 'COMPLETED' },
-    // status: { not: 'PAID' }, // evitamos actualizar redundante
-  },
-  include: {
-    client: true,
-    payment: true,
-    items: true,
-  },
-  orderBy: { date: 'desc' },
-});
+      const sales = await this.prisma.sale.findMany({
+        where: {
+          // payment: { status: 'COMPLETED' },
+          // status: { not: 'PAID' }, // evitamos actualizar redundante
+        },
+        include: {
+          client: true,
+          payment: true,
+          items: true,
+        },
+        orderBy: { date: 'desc' },
+      });
 
-return sales.map((sale) => ({
-  id: sale.id,
-  client: sale.client.name,
-  date: sale.date,
-  totalItems: sale.items.reduce((sum, item) => sum + item.quantity, 0),
-  total: sale.total,
-  paymentMethod: sale.payment.method,
-  statusPayment: sale.payment.status,
-  statusSale: sale.status, // reflejamos cambio en respuesta
-}));
-
+      return sales.map((sale) => ({
+        id: sale.id,
+        client: sale.client.name,
+        date: sale.date,
+        totalItems: sale.items.reduce((sum, item) => sum + item.quantity, 0),
+        total: sale.total,
+        paymentMethod: sale.payment.method,
+        statusPayment: sale.payment.status,
+        statusSale: sale.status, // reflejamos cambio en respuesta
+      }));
     } catch (error) {
       throw new InternalServerErrorException(
         `Error en el ${error} findAllWithRelations`,
       );
     }
+  }
+
+  async findLastFiveSales() {
+    try {
+      const sales = await this.prisma.sale.findMany({
+        include: {
+          client: true,
+          payment: true,
+          items: true,
+        },
+        orderBy: { date: 'desc' },
+        take: 5,
+      });
+
+      return sales.map((sale) => ({
+        id: sale.id.toString().padStart(3, '0'), // Ej: "004"
+        customer: sale.client.name,
+        amount: `$${sale.total.toFixed(2)}`, // Ej: "$450.00"
+        status:
+          sale.payment.status === 'COMPLETED'
+            ? 'Completada'
+            : sale.payment.status,
+        // date: format(new Date(sale.date), 'yyyy-MM-dd', { locale: es }), // Ej: "2024-01-14"
+        date: sale.date.toISOString().split('T')[0], // Ej: "2024-01-14"
+      }));
+    } catch (error) {
+      throw new InternalServerErrorException(
+        `Error en findLastFiveSales: ${error}`,
+      );
+    }
+  }
+  // src/sales/sales.service.ts
+  async getMonthlySalesData() {
+    const rawResult = await this.prisma.$queryRaw<
+      { mes: number; sales: number; orders: bigint }[]
+    >(
+      Prisma.sql`
+     SELECT 
+       MONTH(oi.date) as mes,
+       SUM(oi.total) AS sales,
+       COUNT(*) AS orders
+     FROM pos_pyme.sale oi
+   `,
+    );
+    const result = rawResult.map((r) => ({
+      orders: Number(r.orders),
+      sales: Number(r.sales),
+      mes: Number(r.mes),
+    }));
+
+    return result;
   }
 }

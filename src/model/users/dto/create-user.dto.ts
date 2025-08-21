@@ -20,6 +20,10 @@ export class CreateUserDto {
   @IsOptional()
   image: string;
 
+
+
+
+
 }
 // // // client
 // import { IsOptional, IsString, IsEmail } from 'class-validator';
