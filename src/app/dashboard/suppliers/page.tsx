@@ -136,8 +136,8 @@ export default function SuppliersPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Empresa</TableHead>
-                <TableHead>Contacto</TableHead>
-                <TableHead>Productos</TableHead>
+                <TableHead className="hidden sm:table-cell">Contacto</TableHead>
+                <TableHead className="hidden lg:table-cell">Productos</TableHead>
                 <TableHead>Acciones</TableHead>
               </TableRow>
             </TableHeader>
@@ -150,7 +150,7 @@ export default function SuppliersPage() {
                       <div className="text-sm text-muted-foreground">{supplier.address}</div>
                     </div>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="hidden sm:table-cell">
                     <div>
                       <div className="font-medium">{supplier.contactName||""}</div>
                       <div className="flex items-center space-x-2 text-sm text-muted-foreground">
@@ -166,7 +166,7 @@ export default function SuppliersPage() {
                   {/* <TableCell>
                     <Badge variant="outline">{supplier.phone}</Badge>
                   </TableCell> */}
-                  <TableCell>{supplier.totalProducts}</TableCell>
+                  <TableCell className="hidden lg:table-cell">{supplier.totalProducts}</TableCell>
             
                   <TableCell>
                     <div className="flex space-x-2">

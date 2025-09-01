@@ -97,7 +97,7 @@ useEffect(() => {
         </div>
 
 
-<Link href="/products/new">
+<Link href="./products/new">
   <Button>
     <Plus className="mr-2 h-4 w-4" />
     Agregar Producto
@@ -105,7 +105,7 @@ useEffect(() => {
 </Link>
       </div>
 
-      <Card>
+      <Card className="">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle>Lista de Productos</CardTitle>
@@ -121,37 +121,28 @@ useEffect(() => {
           </div>
         </CardHeader>
         <CardContent>
-          <Table>
+          <Table className="min-w-full">
             <TableHeader>
               <TableRow>
                 <TableHead>Producto</TableHead>
-                <TableHead>Categoría</TableHead>
-                <TableHead>Precio</TableHead>
+                <TableHead className="hidden lg:table-cell">Categoría</TableHead>
+                <TableHead className="hidden sm:table-cell">Precio</TableHead>
                 <TableHead>Stock</TableHead>
-                <TableHead>Estado Stock</TableHead>
-                <TableHead>Proveedor</TableHead>
-                <TableHead>Acciones</TableHead>
+                <TableHead className="hidden md:table-cell">Estado Stock</TableHead>
+                <TableHead className="hidden lg:table-cell">Proveedor</TableHead>
+        
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredProducts.map((product) => (
                 <TableRow key={product.id}>
                   <TableCell className="font-medium">{product.name}</TableCell>
-                  <TableCell>{product.category}</TableCell>
-                  <TableCell>${product.price.toFixed(2)}</TableCell>
+                  <TableCell className="hidden lg:table-cell">{product.category}</TableCell>
+                  <TableCell className="hidden sm:table-cell">${product.price.toFixed(2)}</TableCell>
                   <TableCell>{product.stock} unidades</TableCell>
-                  <TableCell>{getStockBadge(product.stock, product.minStock)} {product.stock} {product.minStock}</TableCell>
-                  <TableCell>{product.supplier}</TableCell>
-                  <TableCell>
-                    <div className="flex space-x-2">
-                      <Button variant="outline" size="sm">
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
+                  <TableCell className="hidden md:table-cell">{getStockBadge(product.stock, product.minStock)} {product.stock} {product.minStock}</TableCell>
+                  <TableCell className="hidden lg:table-cell">{product.supplier}</TableCell>
+                
                 </TableRow>
               ))}
             </TableBody>

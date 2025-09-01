@@ -13,7 +13,7 @@ export function Header() {
             </div>
             <span className="font-bold text-lg">SIME</span>
           </div>
-          <nav className="hidden md:flex space-x-6">
+          {/* <nav className="hidden md:flex space-x-6">
             <a href="#" className="text-gray-600 hover:text-gray-900">
               Home
             </a>
@@ -26,9 +26,9 @@ export function Header() {
             <a href="#" className="text-gray-600 hover:text-gray-900">
               Company
             </a>
-          </nav>
+          </nav> */}
         </div>
-        <div className="flex items-center space-x-4">
+        {/* <div className="flex items-center space-x-4">
           <a href="#" className="text-gray-600 hover:text-gray-900">
             Help desk
           </a>
@@ -39,7 +39,7 @@ export function Header() {
             Resources
           </a>
           <Button className="bg-[#18a0fb] hover:bg-[#1590eb] text-white px-6">Get Started</Button>
-        </div>
+        </div> */}
       </header>
   )
 }

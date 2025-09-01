@@ -35,9 +35,10 @@ useEffect(() => {
 
   const filteredSales = sales.filter((sale) => {
     // const matchesSearch = sale.client.toLowerCase().includes(searchTerm.toLowerCase()) || sale.id.includes(searchTerm)
-    const matchesSearch = (sale.client && sale.client.name && sale.client.name.toLowerCase().includes(searchTerm.toLowerCase())) || (sale.id !== undefined && sale.id.toString().includes(searchTerm))
+    // const matchesSearch = (sale.client && sale.client.name && sale.client.name.toLowerCase().includes(searchTerm.toLowerCase())) || (sale.id !== undefined && sale.id.toString().includes(searchTerm))
     const matchesStatus = statusFilter === "all" || sale.statusSale === statusFilter
-    return matchesSearch && matchesStatus
+    // return matchesSearch && matchesStatus
+    
     return matchesStatus
   })
 
@@ -77,10 +78,10 @@ useEffect(() => {
           <h1 className="text-3xl font-bold tracking-tight">Ventas</h1>
           <p className="text-muted-foreground">Gestiona y monitorea todas tus ventas</p>
         </div>
-        <Button>
+        {/* <Button>
           <Download className="mr-2 h-4 w-4" />
           Exportar Reporte
-        </Button>
+        </Button> */}
       </div>
 
       {/* Stats Cards */}
@@ -128,79 +129,92 @@ useEffect(() => {
           </CardContent>
         </Card>
       </div>
+      <div className="flex flex-col">
+<Card className="">
+  <CardHeader>
+    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <CardTitle className="text-lg md:text-xl">Historial de Ventas</CardTitle>
 
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle>Historial de Ventas</CardTitle>
-            <div className="flex items-center space-x-2">
-              <div className="relative w-72">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                <Input
-                  placeholder="Buscar por cliente o ID..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                  // autoComplete="off"
-                  // name="search_email"
-                  // id="search_sales"
-                  // autoFocus={false} 
-                />
-              </div>
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Estado" />
-                </SelectTrigger>
-                <SelectContent className="w-40 bg-white">
-                  <SelectItem value="all">Todos</SelectItem>
-                  <SelectItem value={SaleStatus.PAID}>Pagadas</SelectItem>
-                  <SelectItem value={SaleStatus.PENDING}>Pendientes</SelectItem>
-                  <SelectItem value={SaleStatus.CANCELLED}>Canceladas</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>ID Venta</TableHead>
-                <TableHead>Cliente</TableHead>
-                <TableHead>Fecha</TableHead>
-                <TableHead>Artículos</TableHead>
-                <TableHead>Total</TableHead>
-                <TableHead>Método de Pago</TableHead>
-                <TableHead>Estado</TableHead>
-                <TableHead>Acciones</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredSales.map((sale) => (
-                // alert(JSON.stringify(sale)),
-                <TableRow key={sale.id}>
-                  <TableCell className="font-medium">#{sale.id}</TableCell>
-                  <TableCell>{sale.client ? sale.client.name : "Sin cliente"}</TableCell>
-                  <TableCell>
-                    {sale.date ? new Date(sale.date).toLocaleDateString("es-ES") : "Sin fecha"}
-                  </TableCell>
-                  <TableCell>{sale.totalItems} artículos</TableCell>
-                  <TableCell className="font-medium">${sale.total.toFixed(2)}</TableCell>
-                  <TableCell>{sale.paymentMethod}</TableCell>
-                  <TableCell>{getStatusBadge(sale.statusSale ?? SaleStatus.PENDING)}</TableCell>
-                  <TableCell>
-                  
-                <ViewSaleDialog data={sale}/>
-                
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full md:w-auto">
+        {/* Search input */}
+        <div className="relative w-full sm:w-72">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+          <Input
+            placeholder="Buscar por cliente o ID..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10 w-full"
+          />
+        </div>
 
+        {/* Status filter */}
+        <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <SelectTrigger className="w-full sm:w-40">
+            <SelectValue placeholder="Estado" />
+          </SelectTrigger>
+          <SelectContent className="w-full sm:w-40 bg-white">
+            <SelectItem value="all">Todos</SelectItem>
+            <SelectItem value={SaleStatus.PAID}>Pagadas</SelectItem>
+            <SelectItem value={SaleStatus.PENDING}>Pendientes</SelectItem>
+            <SelectItem value={SaleStatus.CANCELLED}>Canceladas</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+  </CardHeader>
 
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+  
+  <CardContent>
+
+  <div className="overflow-x-auto">
+  <Table className="min-w-full overflow-auto">
+    <TableHeader>
+      <TableRow>
+        <TableHead>ID Venta</TableHead>
+        <TableHead>Cliente</TableHead>
+        <TableHead className="sm:table-cell hidden">Total</TableHead>
+        <TableHead className="md:table-cell hidden">Fecha</TableHead>
+        <TableHead className="md:table-cell hidden">Artículos</TableHead>
+        <TableHead className="lg:table-cell hidden">Método de Pago</TableHead>
+        <TableHead className="lg:table-cell hidden">Estado</TableHead>
+        <TableHead className="lg:table-cell hidden">Acciones</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {filteredSales.map((sale) => (
+        <TableRow key={sale.id}>
+          <TableCell className="font-medium">#{sale.id}</TableCell>
+          <TableCell>{sale.client}</TableCell>
+          <TableCell className="hidden sm:table-cell font-medium">
+            ${sale.total.toFixed(2)}
+          </TableCell>
+          <TableCell className="hidden md:table-cell">
+            {sale.date
+              ? new Date(sale.date).toLocaleDateString("es-ES")
+              : "Sin fecha"}
+          </TableCell>
+          <TableCell className="hidden md:table-cell">
+            {sale.totalItems} artículos
+          </TableCell>
+          <TableCell className="hidden lg:table-cell">
+            {sale.paymentMethod}
+          </TableCell>
+          <TableCell className="hidden lg:table-cell">
+            {getStatusBadge(sale.statusSale ?? SaleStatus.PENDING)}
+          </TableCell>
+          <TableCell className="hidden lg:table-cell">
+            <ViewSaleDialog data={sale} />
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</div>
+</CardContent>
+</Card>        
+      </div>
+
+   
     </div>
   )
 }

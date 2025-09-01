@@ -10,7 +10,7 @@ import { Footer } from "@/components/landing/footer"
 
 export default function Component() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white ">
       {/* Header */}
 <Header></Header>
 

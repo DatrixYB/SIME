@@ -82,7 +82,8 @@ export default function AccessibilityPanel() {
   };
 
   return (
-    <div className="fixed bottom-20 right-10 z-50">
+    // <div className="fixed bottom-20 right-10 z-50">
+    <div className="">
       <button
         onClick={() => setButtonsVisible((prev) => !prev)}
         className="w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center"

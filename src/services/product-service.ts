@@ -23,13 +23,29 @@ export type CreateProductDto = {
   price: number
   stock: number
 }
-
+export type LowStockProduct ={
+        id: number,
+        name: string,
+        stock: number,
+        minStock: number,
+        category: string,
+        supplier: string,
+        alert: string
+}
 // Listar todos los productos
 export const getProducts = async (): Promise<Product[]> => {
   const { data } = await axiosClient.get('/products')
   console.log('Products fetched:', data)
   return data
 }
+
+// Listar todos los productos 5 con stock bajo
+export const getProductsLowStock = async (): Promise<LowStockProduct[]> => {
+  const { data } = await axiosClient.get('/products/stock-low')
+  console.log('Products stock-low fetched:', data)
+  return data
+}
+
 
 // Obtener producto por ID
 export const getProductById = async (id: number): Promise<Product> => {

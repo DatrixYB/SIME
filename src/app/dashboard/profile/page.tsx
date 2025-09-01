@@ -101,18 +101,18 @@ export default function ProfilePage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Avatar</TableHead>
+                <TableHead className="hidden lg:table-cell">Avatar</TableHead>
                 <TableHead>Nombre</TableHead>
-                <TableHead>Email</TableHead>
+                <TableHead className="hidden md:table-cell">Email</TableHead>
                 <TableHead>Rol</TableHead>
-                <TableHead>Registro</TableHead>
+                <TableHead className="hidden lg:table-cell">Registro</TableHead>
                 <TableHead>Acciones</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredUsers.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell>
+                  <TableCell className="hidden lg:table-cell">
     
                     {isValidImageUrl(user.image) ? (
   <Image
@@ -127,13 +127,13 @@ export default function ProfilePage() {
 )}
                   </TableCell>
                   <TableCell className="font-medium">{user.name}</TableCell>
-                  <TableCell className="font-medium">{user.email}</TableCell>
+                  <TableCell className="hidden md:table-cell font-medium">{user.email}</TableCell>
                   <TableCell>
                     <Badge variant={user.role === "ADMIN" ? "default" : "secondary"}>
                       {user.role}
                     </Badge>
                   </TableCell>
-                  <TableCell>{new Date(user.createdAt).toLocaleDateString()}</TableCell>
+                  <TableCell className="hidden lg:table-cell">{new Date(user.createdAt).toLocaleDateString()}</TableCell>
                   <TableCell>
                     <div className="flex space-x-2">
                       {/* <Button variant="outline" size="sm">
@@ -145,7 +145,7 @@ export default function ProfilePage() {
                       <Button variant="outline" size="sm" onClick={() => handleDeleteUser(user.id)}>
                         <Trash2 className="h-4 w-4" />
                       </Button>
-                          <Button
+                          {/* <Button
             type="button"
             variant={isActive ? 'default' : 'outline'}
             className={`w-32 transition-colors ${isActive
@@ -156,7 +156,7 @@ export default function ProfilePage() {
             aria-pressed={isActive}
           >
             {isActive ? 'Activo' : 'Inactivo'}
-          </Button>
+          </Button> */}
                     </div>
                   </TableCell>
                 </TableRow>

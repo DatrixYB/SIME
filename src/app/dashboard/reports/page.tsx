@@ -5,30 +5,71 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { TrendingUp, DollarSign, Package, Users, Download } from "lucide-react"
+import { useEffect, useState } from "react"
+import { getSaleData, getTopProducts, getTopSuppliers, SalesData, TopProducts, TopSuppliers } from "@/services/reports-service"
 
 export default function ReportsPage() {
-  const salesData = [
-    { month: "Enero", sales: 45231.89, orders: 234 },
-    { month: "Febrero", sales: 52341.23, orders: 267 },
-    { month: "Marzo", sales: 48923.45, orders: 245 },
-    { month: "Abril", sales: 61234.56, orders: 298 },
-    { month: "Mayo", sales: 58432.1, orders: 276 },
-    { month: "Junio", sales: 67891.23, orders: 312 },
-  ]
+  // const salesData = [
+  //   { month: "Enero", sales: 45231.89, orders: 234 },
+  //   { month: "Febrero", sales: 52341.23, orders: 267 },
+  //   { month: "Marzo", sales: 48923.45, orders: 245 },
+  //   { month: "Abril", sales: 61234.56, orders: 298 },
+  //   { month: "Mayo", sales: 58432.1, orders: 276 },
+  //   { month: "Junio", sales: 67891.23, orders: 312 },
+  // ]
 
-  const topProducts = [
-    { name: "Laptop Dell XPS 13", sales: 45, revenue: 58494.55 },
-    { name: "Mouse Inalámbrico", sales: 123, revenue: 3688.77 },
-    { name: "Teclado Mecánico", sales: 67, revenue: 6029.33 },
-    { name: 'Monitor 24"', sales: 34, revenue: 10199.66 },
-    { name: "Auriculares Bluetooth", sales: 56, revenue: 8399.44 },
-  ]
+  // const topProducts = [
+  //   { name: "Laptop Dell XPS 13", sales: 45, revenue: 58494.55 },
+  //   { name: "Mouse Inalámbrico", sales: 123, revenue: 3688.77 },
+  //   { name: "Teclado Mecánico", sales: 67, revenue: 6029.33 },
+  //   { name: 'Monitor 24"', sales: 34, revenue: 10199.66 },
+  //   { name: "Auriculares Bluetooth", sales: 56, revenue: 8399.44 },
+  // ]
 
-  const topSuppliers = [
-    { name: "Tech Distributor SA", orders: 45, amount: 125430.5 },
-    { name: "Office Supplies Co", orders: 23, amount: 45230.75 },
-    { name: "Gaming Gear Ltd", orders: 18, amount: 67890.25 },
-  ]
+  // const topSuppliers = [
+  //   { name: "Tech Distributor SA", orders: 45, amount: 125430.5 },
+  //   { name: "Office Supplies Co", orders: 23, amount: 45230.75 },
+  //   { name: "Gaming Gear Ltd", orders: 18, amount: 67890.25 },
+  // ]
+  
+  const [topProducts , setTopProducts] = useState<TopProducts[]>([])
+  const [topSuppliers , setTopSuppliers] = useState<TopSuppliers[]>([])
+  const [salesData , setSalesData] = useState<SalesData[]>([])
+   
+  useEffect(() => {
+      
+          const fetchTopProduct = async () => {
+        try {
+          const topProductData = await getTopProducts();
+          console.log("Fetched stats:", topProductData);
+            setTopProducts(topProductData);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      }
+    const fetchTopSuppliers = async () => {
+        try {
+          const topSupplierData = await getTopSuppliers();
+          console.log("Fetched products:", topSupplierData);
+            setTopSuppliers(topSupplierData);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      }
+        const fetchSaleData = async () => {
+        try {
+          const saleData = await getSaleData();
+          console.log("Fetched products:", saleData);
+            setSalesData(saleData);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      }
+      fetchSaleData();
+      fetchTopProduct();
+      fetchTopSuppliers();
+    }, []);
+  
 
   return (
     <div className="space-y-6">
@@ -37,7 +78,7 @@ export default function ReportsPage() {
           <h1 className="text-3xl font-bold tracking-tight">Reportes</h1>
           <p className="text-muted-foreground">Análisis detallado del rendimiento de tu negocio</p>
         </div>
-        <div className="flex items-center space-x-2">
+        {/* <div className="flex items-center space-x-2">
           <Select defaultValue="month">
             <SelectTrigger className="w-40">
               <SelectValue />
@@ -53,7 +94,7 @@ export default function ReportsPage() {
             <Download className="mr-2 h-4 w-4" />
             Exportar PDF
           </Button>
-        </div>
+        </div> */}
       </div>
 
       {/* Summary Cards */}

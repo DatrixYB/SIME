@@ -19,12 +19,17 @@ export const createCategory = async (payload: Omit<Category, 'id' | 'createdAt' 
   const { data } = await axiosClient.post('/Category', payload)
   return data
 }
+// export const createCategory = async ({ name }: { name: string }) => {
+//   const { data } = await axiosClient.post("/categories", { name });
+//   return data; // { id, name }
+// };
 
 export const updateCategory = async (id: number, payload: Partial<Category>): Promise<Category> => {
   const { data } = await axiosClient.put(`/Category/${id}`, payload)
   return data
 }
 
-export const deleteCategory = async (id: number): Promise<void> => {
+export const deleteCategory = async (id: string): Promise<void> => {
+  alert(id)
   await axiosClient.delete(`/Category/${id}`)
 }

@@ -11,19 +11,38 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import AccessibilityPanel from "./utils/accesibility"
+import { logOut } from "@/services/auth-service"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { useUser } from "@/hooks/context/user-context"
 
 export function Header() {
+   const { user } = useUser();
+  // useRouter
+  const router =  useRouter()
+  useEffect(() => {
+
+  }, [])
+
+  const handleLogout = async () => {
+
+    await logOut();
+    router.push('/');
+  }
   return (
     <header className="bg-white shadow-sm border-b">
       <div className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center space-x-4">
-          <div className="relative">
+          {/* <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
             <Input type="search" placeholder="Buscar productos, clientes..." className="pl-10 w-80" />
-          </div>
+          </div> */}
         </div>
 
         <div className="flex items-center space-x-4">
+                                  <AccessibilityPanel/>
+
           <Button variant="ghost" size="icon">
             <Bell className="h-5 w-5" />
           </Button>
@@ -34,13 +53,16 @@ export function Header() {
                 <User className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
+            <DropdownMenuContent align="end" className="bg-white ">
+              {/* <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel> */}
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Perfil</DropdownMenuItem>
-              <DropdownMenuItem>Configuración</DropdownMenuItem>
+              {/* <DropdownMenuItem>Perfil</DropdownMenuItem> */}
+              <DropdownMenuItem>Usuario
+                <span className="ml-2 font-medium">{user?.name || "Invitado"}</span>
+              </DropdownMenuItem>
+              {/* <DropdownMenuItem>Configuración</DropdownMenuItem> */}
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Cerrar Sesión</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => { handleLogout()}}>Cerrar Sesión</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

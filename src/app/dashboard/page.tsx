@@ -5,51 +5,106 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { BarChart3, DollarSign, Package, ShoppingCart, Users, AlertTriangle, Calendar } from "lucide-react"
 import Link from "next/link"
+import { useEffect, useState } from "react"
+import { get_5_Last_Sales, SaleRecent, SaleStatus } from "@/services/sale-service"
+import { getProductsLowStock, LowStockProduct } from "@/services/product-service"
+import { getStats } from "@/services/stats-service"
 
 export default function Dashboard() {
-  const stats = [
-    {
-      title: "Ventas del Mes",
-      value: "$45,231.89",
-      change: "+20.1%",
-      icon: DollarSign,
-      color: "text-green-600",
-    },
-    {
-      title: "Productos",
-      value: "2,350",
-      change: "+180 nuevos",
-      icon: Package,
-      color: "text-blue-600",
-    },
-    {
-      title: "Proveedores",
-      value: "45",
-      change: "+3 este mes",
-      icon: Users,
-      color: "text-purple-600",
-    },
-    {
-      title: "Órdenes Pendientes",
-      value: "12",
-      change: "-5 desde ayer",
-      icon: ShoppingCart,
-      color: "text-orange-600",
-    },
-  ]
+  // const stats = [
+  //   {
+  //     title: "Ventas del Mes",
+  //     value: "$45,231.89",
+  //     change: "+20.1%",
+  //     icon: DollarSign,
+  //     color: "text-green-600",
+  //   },
+  //   {
+  //     title: "Productos",
+  //     value: "2,350",
+  //     change: "+180 nuevos",
+  //     icon: Package,
+  //     color: "text-blue-600",
+  //   },
+  //   {
+  //     title: "Proveedores",
+  //     value: "45",
+  //     change: "+3 este mes",
+  //     icon: Users,
+  //     color: "text-purple-600",
+  //   },
+  //   {
+  //     title: "Órdenes Pendientes",
+  //     value: "12",
+  //     change: "-5 desde ayer",
+  //     icon: ShoppingCart,
+  //     color: "text-orange-600",
+  //   },
+  // ]
 
-  const recentSales = [
-    { id: "001", customer: "María González", amount: "$250.00", status: "Completada", date: "2024-01-15" },
-    { id: "002", customer: "Carlos Rodríguez", amount: "$150.00", status: "Pendiente", date: "2024-01-15" },
-    { id: "003", customer: "Ana Martínez", amount: "$350.00", status: "Completada", date: "2024-01-14" },
-    { id: "004", customer: "Luis Fernández", amount: "$450.00", status: "Completada", date: "2024-01-14" },
-  ]
+  // const recentSales = [
+  //   { id: "001", customer: "María González", amount: "$250.00", status: "Completada", date: "2024-01-15" },
+  //   { id: "002", customer: "Carlos Rodríguez", amount: "$150.00", status: "Pendiente", date: "2024-01-15" },
+  //   { id: "003", customer: "Ana Martínez", amount: "$350.00", status: "Completada", date: "2024-01-14" },
+  //   { id: "004", customer: "Luis Fernández", amount: "$450.00", status: "Completada", date: "2024-01-14" },
+  // ]
 
-  const lowStockProducts = [
-    { name: "Laptop Dell XPS", stock: 3, minStock: 10 },
-    { name: "Mouse Inalámbrico", stock: 5, minStock: 20 },
-    { name: "Teclado Mecánico", stock: 2, minStock: 15 },
-  ]
+  // const lowStockProducts = [
+  //   { name: "Laptop Dell XPS", stock: 3, minStock: 10 },
+  //   { name: "Mouse Inalámbrico", stock: 5, minStock: 20 },
+  //   { name: "Teclado Mecánico", stock: 2, minStock: 15 },
+  // ]
+
+// Define the type for a stat object
+type Stat = {
+  title: string
+  value: string
+  change: string
+  icon: React.ElementType
+  color: string
+}
+
+// Estado para stats
+const [stats, setStats] = useState<Stat[]>([])
+// Estado para lowStockProducts
+const [lowStockProducts, setLowStockProducts] = useState<LowStockProduct[]>([])
+      // Estado para sales
+  const [recentSales , setSales] = useState<SaleRecent[]>([])
+   
+  useEffect(() => {
+      
+          const fetchStats = async () => {
+        try {
+          const statsData = await getStats();
+          console.log("Fetched stats:", statsData);
+            setStats(statsData);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      }
+    const fetchSales = async () => {
+        try {
+          const salesData = await get_5_Last_Sales();
+          console.log("Fetched products:", salesData);
+            setSales(salesData);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      }
+        const fetchStock = async () => {
+        try {
+          const stockData = await getProductsLowStock();
+          console.log("Fetched products:", stockData);
+            setLowStockProducts(stockData);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      }
+      fetchStats();
+      fetchSales();
+      fetchStock();
+    }, []);
+  
 
   return (
     <div className="space-y-6">
@@ -77,7 +132,7 @@ export default function Dashboard() {
           <Card key={index}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-              <stat.icon className={`h-4 w-4 ${stat.color}`} />
+              {/* <stat.icon className={`h-4 w-4 ${stat.color}`} /> */}
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stat.value}</div>
@@ -104,7 +159,7 @@ export default function Dashboard() {
                     </p>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Badge variant={sale.status === "Completada" ? "default" : "secondary"}>{sale.status}</Badge>
+                    <Badge variant={sale.status === SaleStatus.PAID ? "default" : "secondary"}>{sale.status}</Badge>
                     <div className="font-medium">{sale.amount}</div>
                   </div>
                 </div>
@@ -112,7 +167,7 @@ export default function Dashboard() {
             </div>
             <div className="mt-4">
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/sales">Ver Todas las Ventas</Link>
+                <Link href="/dashboard/sales">Ver Todas las Ventas</Link>
               </Button>
             </div>
           </CardContent>
@@ -145,7 +200,7 @@ export default function Dashboard() {
             </div>
             <div className="mt-4">
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/products">Gestionar Inventario</Link>
+                <Link href="/dashboard/products">Gestionar Inventario</Link>
               </Button>
             </div>
           </CardContent>
@@ -160,25 +215,25 @@ export default function Dashboard() {
         <CardContent>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Button asChild className="h-20 flex-col">
-              <Link href="/pos">
+              <Link href="/dashboard/pos">
                 <ShoppingCart className="h-6 w-6 mb-2" />
                 Punto de Venta
               </Link>
             </Button>
             <Button asChild variant="outline" className="h-20 flex-col bg-transparent">
-              <Link href="/products">
+              <Link href="/dashboard/products">
                 <Package className="h-6 w-6 mb-2" />
                 Agregar Producto
               </Link>
             </Button>
             <Button asChild variant="outline" className="h-20 flex-col bg-transparent">
-              <Link href="/suppliers">
+              <Link href="/dashboard/suppliers">
                 <Users className="h-6 w-6 mb-2" />
                 Nuevo Proveedor
               </Link>
             </Button>
             <Button asChild variant="outline" className="h-20 flex-col bg-transparent">
-              <Link href="/reports">
+              <Link href="/dashboard/reports">
                 <BarChart3 className="h-6 w-6 mb-2" />
                 Ver Reportes
               </Link>

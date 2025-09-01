@@ -30,11 +30,23 @@ export type Sale = {
   statusSale?: SaleStatus
   // status?: string
 }
+export type SaleRecent={
+    id: string,
+    customer: string,
+      amount: string,
+        status: SaleStatus,
+        date: string
+}
 
 export const getSales = async (): Promise<Sale[]> => {
   const { data } = await axiosClient.get('/sales')
   return data
 }
+export const get_5_Last_Sales = async (): Promise<SaleRecent[]> => {
+  const { data } = await axiosClient.get('/sales/recent')
+  return data
+}
+
 
 export const getSaleById = async (id: number): Promise<Sale> => {
   const { data } = await axiosClient.get(`/sales/${id}`)
