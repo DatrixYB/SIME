@@ -1,5 +1,5 @@
 // src/sales/dto/create-sale.dto.ts
-import { OrderStatus } from '@prisma/client';
+import { OrderStatus, SaleStatus } from '@prisma/client';
 import {IsEnum, IsNumber, IsDateString, IsInt, IsOptional, IsPositive } from 'class-validator';
 
 export class CreateSaleDto {
@@ -26,6 +26,6 @@ export class CreateSaleDto {
   @IsPositive()
   orden: number;
 
-  @IsEnum(OrderStatus)
-  status: OrderStatus
+  @IsEnum(SaleStatus)
+  status: SaleStatus
 }

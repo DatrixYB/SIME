@@ -46,6 +46,9 @@ export class ClientService {
   orderBy: { createdAt: 'desc' },
 });
     if (!client) {
+      return {'message':"not found client",
+        'notfound':true
+      }
       throw new NotFoundException('Cliente no encontrado');
     }
     return client;

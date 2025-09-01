@@ -1,6 +1,6 @@
 // client.service.ts
 
-import { Prisma } from '@prisma/client';
+import { PaymentStatus, Prisma, SaleStatus } from '@prisma/client';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
 
@@ -12,13 +12,13 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-
+import { PaymentService } from '../payment/payment.service';
 // import { InternalSererErrorException } from '@nestjs/common';
 // import { format } from 'date-fns';
 // import { es } from 'date-fns/locale';
 @Injectable()
 export class SaleService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService,private readonly payment:PaymentService) {}
 
   async create(createSaleorderDto: CreateSaleDto) {
     try {
@@ -32,13 +32,22 @@ export class SaleService {
       if (!existingUser) {
         throw new BadRequestException(`Usuario con ID ${userId} no encontrado`);
       }
+     const paid =  await this.payment.findOne(paymentId)
+     let status = ""
+     if (paid.status === PaymentStatus.COMPLETED){
+      status = SaleStatus.PAID
+     }else{
+      status = SaleStatus.PENDING
+     }
       const saleData: any = {
         ...rest,
         client: clientId ? { connect: { id: clientId } } : undefined,
         user: userId ? { connect: { id: userId } } : undefined,
         payment: paymentId ? { connect: { id: paymentId } } : undefined,
+        status: status
         // Add other relations if needed, e.g. items
       };
+
       return await this.prisma.sale.create({ data: saleData });
     } catch (error) {
       console.error('Error creating sale order:', error);
@@ -192,12 +201,27 @@ export class SaleService {
      FROM pos_pyme.sale oi
    `,
     );
+    const monthNames = [
+      'Enero',
+      'Febrero',
+      'Marzo',
+      'Abril',
+      'Mayo',
+      'Junio',
+      'Julio',
+      'Agosto',
+      'Septiembre',
+      'Octubre',
+      'Noviembre',
+      'Diciembre',
+    ];
+
     const result = rawResult.map((r) => ({
       orders: Number(r.orders),
       sales: Number(r.sales),
-      mes: Number(r.mes),
+      month: monthNames[r.mes - 1],
     }));
-
+    console.log(result);
     return result;
   }
 }

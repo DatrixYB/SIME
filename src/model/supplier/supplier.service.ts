@@ -134,7 +134,7 @@ export class SupplierService {
     const result = rawResult.map((r) => ({
       orders: Number(r.orders),
       name: String(r.name),
-      total: Number(r.amount),
+      amount: Number(r.amount),
     }));
     console.error(result);
     return result;

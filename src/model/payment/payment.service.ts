@@ -7,6 +7,7 @@ import {
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
+import { PaymentStatus, PaymentType } from '@prisma/client';
 
 @Injectable()
 export class PaymentService {
@@ -14,6 +15,10 @@ export class PaymentService {
   Name = 'paymentService';
   async create(dto: CreatePaymentDto) {
     try {
+if (dto.method === PaymentType.CASH){
+dto.status = PaymentStatus.COMPLETED
+}
+
       return await this.prisma.payment.create({ data: dto });
     } catch (error) {
       throw new InternalServerErrorException(`Error al crear el ${this.Name}'`);
