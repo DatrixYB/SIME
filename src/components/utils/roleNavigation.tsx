@@ -15,14 +15,14 @@ export function getNavigationByRole(role?: UserRole) {
       ]
     case UserRole.SELLER:
       return [
-        { name: "Dashboard", href: "/dashboard", icon: Home },
+        // { name: "Dashboard", href: "/dashboard", icon: Home },
         { name: "Ventas", href: "/dashboard/sales", icon: ShoppingCart },
         { name: "Punto de Venta", href: "/dashboard/pos", icon: Store },
 
       ]
     default:
       return [
-        { name: "Dashboard", href: "/dashboard", icon: Home },
+        { name: "not", href: "/", icon: Home },
       ]
   }
 }

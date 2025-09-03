@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@radix-ui/themes"
+import Link from "next/link"
 
 
 export function Header() {
@@ -9,7 +10,10 @@ export function Header() {
         <div className="flex items-center space-x-8">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-[#18a0fb] rounded flex items-center justify-center">
-              <span className="text-white font-bold text-sm">S</span>
+             <Link  href="/">
+              <span className="text-white font-bold text-sm" >S</span>
+             
+             </Link> 
             </div>
             <span className="font-bold text-lg">SIME</span>
           </div>

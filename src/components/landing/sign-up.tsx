@@ -48,11 +48,7 @@ export function SignUp() {
     try {
       setLoading(true);
       // Ajustá la URL/acción a tu backend o Server Action
-      // const res = await fetch("/api/auth/signup", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ email: form.email, password: form.password }),
-      // });
+
       const res = await createUserSignUp({
       email: form.email,
       name: form.name,
@@ -173,8 +169,9 @@ export function SignUp() {
               />
               <p className="text-xs text-zinc-500">Usá al menos 8 caracteres.</p>
             </div>
+            {/* code subscription */}
                  <div className="space-y-2">
-              <Label.Root htmlFor="email" className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
+              <Label.Root htmlFor="code" className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
                 Codigo de suscripción
               </Label.Root>
               <input
@@ -209,13 +206,10 @@ export function SignUp() {
                 className="cursor-pointer text-sm text-zinc-700 dark:text-zinc-300"
               >
                 Acepto los{" "}
-                <a href="/terminos" className="text-sky-700 underline hover:no-underline dark:text-sky-400">
-                  Términos
-                </a>{" "}
-                y la{" "}
-                <a href="/privacidad" className="text-sky-700 underline hover:no-underline dark:text-sky-400">
-                  Política de Privacidad
-                </a>
+                <Link href="/terms" className="text-sky-700 underline hover:no-underline dark:text-sky-400">
+                  Términos y la  Política de Privacidad
+                </Link>{" "}
+  
                 .
               </Label.Root>
             </div>

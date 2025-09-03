@@ -5,6 +5,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import '@radix-ui/themes/styles.css';
+import { Footer } from "@/components/landing/footer";
+import { Header } from "@/components/landing/header"
 // import { Theme } from '@radix-ui/themes';
 
 
@@ -39,11 +41,12 @@ export default function RootLayout({
 
             {/* Contenido principal */}
             <div className="flex-1 flex flex-col">
-              {/* <Header /> */}
-              <main className="flex-1 overflow-x-hidden overflow-y-auto  bg-sand-1 bg-red-100">
-                {/* {children} */}
-                  {children}
+         
 
+              <main className="flex-1 overflow-x-hidden overflow-y-auto  bg-sand-1">
+                {/* {children} */}
+
+                  {children}
               </main>
             </div>
           </div>

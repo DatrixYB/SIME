@@ -20,7 +20,7 @@ import { createSaleItem, createSaleOrderItems, SaleItem, SaleOrderItems } from "
 import { useRouter } from 'next/navigation';
 import { useUser } from "@/hooks/context/user-context"
 import ClientCard from "@/components/dashboard/clientCard"
-import { Client, getClients, getLastClient } from "@/services/client-service"
+import { Client, getLastClient } from "@/services/client-service"
 
 
 
@@ -49,6 +49,8 @@ export default function POSPage() {
   const [order, setOrder] = useState(1)
   const [client, setClient] = useState("")
   const [clientId, setClientId] = useState<number>()
+  const [selected, setSelected] = useState<'ninguno'|'default' | 'custom'>('ninguno');
+  
 
 
 
@@ -64,7 +66,8 @@ export default function POSPage() {
     }
     const fetchClient = async () => {
       try {
-        const clientArray: Client[] = await getLastClient();
+        const clientResult = await getLastClient();
+        const clientArray: Client[] = Array.isArray(clientResult) ? clientResult : [];
         const clientData = clientArray[0];
         setClient(clientData?.name || "Default Client");
         setClientId(clientData?.id);
@@ -307,9 +310,10 @@ export default function POSPage() {
                     <span className="font-bold mb-2">Cliente: {client || "Default"}</span>
                   </div>
                   <div className="p-6">
-                    <ClientCard onClientCreated={(name, id) => {
+                    <ClientCard onClientCreated={(name, id, selectedValue) => {
                       setClient(name);
                       setClientId(id)
+                      setSelected(selectedValue as 'ninguno' | 'default' | 'custom')
                     }} />
                     {/* Aquí iría el resto del carrito */}
                   </div>
@@ -398,12 +402,12 @@ export default function POSPage() {
 
                   <div className="flex justify-center">
                     {/* <Button className="w-full" size="lg" onClick={handleCheckout}> */}
-                    <Button className="w-full" onClick={handleCheckout}>
+                    <Button className="w-full" onClick={handleCheckout} disabled={selected==="ninguno" }>
                       <Landmark className="mr-2 h-4 w-4" />
                       Procesar Venta
                     </Button>
                   </div>
-
+ 
                 </div>
               )}
             </CardContent>
