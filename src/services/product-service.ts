@@ -38,6 +38,13 @@ export const getProducts = async (): Promise<Product[]> => {
   console.log('Products fetched:', data)
   return data
 }
+// Listar todos los productos
+export const getProductsBySupplier = async (id:number): Promise<Product[]> => {
+  const { data } = await axiosClient.get(`/products/supplier/${id}`)
+  console.log('Products supplier fetched:', data)
+  return data
+}
+
 
 // Listar todos los productos 5 con stock bajo
 export const getProductsLowStock = async (): Promise<LowStockProduct[]> => {

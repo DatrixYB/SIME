@@ -6,13 +6,14 @@ import {
   SelectItem,
   SelectContent,
 } from '@/components/ui/select'
-import { getProducts, Product } from '@/services/product-service'
+import { getProductById, getProducts, getProductsBySupplier, Product } from '@/services/product-service'
 import { Button } from '@radix-ui/themes'
 import { Plus } from 'lucide-react'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 type Props = {
   onSubmitUpdate: (product: CartItem) => void;
+  subplierID?:number;
 };
 
 // Define CartItem type based on usage in addToCart
@@ -32,12 +33,12 @@ type CartItem = {
 };
 
 
-function UpdateProductsSection({ onSubmitUpdate }: Props) {
+function UpdateProductsSection({ onSubmitUpdate ,subplierID}: Props) {
 
   // Product
   const [nameProduct, setNameProduct] = useState('')
-  const [price, setPrice] = useState<number | ''>('')
-  const [stock, setStock] = useState<number | ''>('')
+  const [price, setPrice] = useState<number | ''>(0)
+  const [stock, setStock] = useState<number | ''>(0)
   const [minStock, setMinStock] = useState<number>(5)
   const [description, setDescription] = useState('')
   const [isActive, setIsActive] = useState(true)
@@ -76,7 +77,8 @@ function UpdateProductsSection({ onSubmitUpdate }: Props) {
 
     const fetchProducts = async () => {
       try {
-        const data: Product[] = await getProducts()
+        alert(subplierID)
+        const data: Product[] = await getProductsBySupplier(subplierID || 0)
         console.log('Proveedores obtenidos:', data)
         setProducts(data)
       } catch (error) {
@@ -136,7 +138,7 @@ function UpdateProductsSection({ onSubmitUpdate }: Props) {
               <SelectValue placeholder="Seleccionar producto" />
             </SelectTrigger>
             <SelectContent className="bg-white rounded-xl shadow-lg border border-[#cedce8]">
-              {products.map((product) => (
+              {products &&   products.map((product) => (
                 <SelectItem
                   key={product.id}
                   value={product.name}
@@ -182,11 +184,14 @@ function UpdateProductsSection({ onSubmitUpdate }: Props) {
             <Input
               type="number"
               value={stock}
-              onChange={(e) => setStock(parseInt(e.target.value))}
-              placeholder="Cantidad en stock"
+  onChange={(e) => {
+    const value = e.target.value
+    setStock(value === '' ? 0 : parseInt(value))
+  }}              placeholder="Cantidad en stock"
               min={0}
               required
             />
+     
           </div>
 
           {/* Stock mínimo */}
@@ -195,7 +200,10 @@ function UpdateProductsSection({ onSubmitUpdate }: Props) {
             <Input
               type="number"
               value={minStock}
-              onChange={(e) => setMinStock(parseInt(e.target.value))}
+                onChange={(e) => {
+    const value = e.target.value
+    setMinStock(value === '' ? 0 : parseInt(value))
+  }}
               placeholder="Mínimo en stock"
               min={0}
               required

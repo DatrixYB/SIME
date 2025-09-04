@@ -140,7 +140,7 @@ useEffect(() => {
                   <TableCell className="hidden lg:table-cell">{product.category}</TableCell>
                   <TableCell className="hidden sm:table-cell">${product.price.toFixed(2)}</TableCell>
                   <TableCell>{product.stock} unidades</TableCell>
-                  <TableCell className="hidden md:table-cell">{getStockBadge(product.stock, product.minStock)} {product.stock} {product.minStock}</TableCell>
+                  <TableCell className="hidden md:table-cell">{getStockBadge(product.stock, product.minStock)}</TableCell>
                   <TableCell className="hidden lg:table-cell">{product.supplier}</TableCell>
                 
                 </TableRow>

@@ -24,6 +24,7 @@ import { useRouter } from "next/navigation";
 import { useUser } from '@/hooks/context/user-context'
 import DeleteCategoryDialog from '@/components/supplier/DeleteCategory'
 import ProductTabs from '@/components/utils/tabs'
+import ProviderData from '@/components/products/providerdata'
 
 interface CartItem extends Product {
   quantity: number
@@ -36,13 +37,14 @@ export default function ProductForm() {
   // Router 
   const router = useRouter();
   // Proveedor
-  const [name, setName] = useState('')
+  const [name, setName] = useState('no')
   const [contactName, setContactName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
   const [suppliers, setSuppliers] = useState<Supplier[]>([])
   const [categories, setCategories] = useState<Category[]>([])
+  const [supplier, setSupplier] = useState<Supplier | undefined>(undefined)
   // Categoria
   const [newCategoryName, setNewCategoryName] = useState("");
   // Selección de proveedor y categoría
@@ -169,6 +171,18 @@ export default function ProductForm() {
       alert('Solo puedes agregar productos del mismo proveedor al carrito')
       return
     }
+    const existingItemName = cart.find((item) => item.name === newProduct.name)
+
+if (existingItemName) {
+  alert('El producto ya está en el carrito')
+  setCart(cart.map((item) =>
+    item.name === newProduct.name
+      ? { ...item, stock:item.stock+newProduct.stock  }
+      : item
+  ))
+} else {
+  setCart([...cart, newProduct])
+}
 
     const existingItem = cart.find((item) => item.id === newProduct.id)
     if (existingItem) {
@@ -180,7 +194,21 @@ export default function ProductForm() {
     } else {
       setCart([...cart, newProduct])
     }
+const existingItemIndex = cart.findIndex(item => item.name === newProduct.name)
 
+if (existingItemIndex !== -1) {
+  const updatedCart = [...cart]
+  updatedCart[existingItemIndex] = {
+    ...updatedCart[existingItemIndex],
+    quantity: updatedCart[existingItemIndex].quantity + 1,
+    stock:updatedCart[existingItemIndex].stock+ newProduct.stock, // opcional: actualiza stock si cambió
+    price: newProduct.price, // opcional: actualiza precio si cambió
+    description: newProduct.description // opcional
+  }
+  setCart(updatedCart)
+} else {
+  setCart([...cart, newProduct])
+}
     setSelectedProduct(selectedProduct + 1) // opcional
     alert('Producto agregado al carrito correctamente')
   }
@@ -266,20 +294,7 @@ export default function ProductForm() {
       alert('Productos validados y listos para enviar al backend:\n' + JSON.stringify(validProducts, null, 2))
       alert('Order:\n' + JSON.stringify(orderCreated, null, 2))
       console.log('Productos validados y listos para enviar al backend:\n' + JSON.stringify(validProducts, null, 2))
-      // await createProduct(validProducts);
-      //  const productsPayload = {
-      //   products: cart.map(p => ({
-      //     name: p.name,
-      //     price: p.price,
-      //     stock: p.stock,
-      //     minStock: p.minStock,
-      //     description: p.description || 'Moto',
-      //     image: p.image || 'default',
-      //     isActive: p.isActive ?? true,
-      //     supplierId: p.supplierId,
-      //     categoryId: p.categoryId,
-      //   })),
-      // };
+
       const productsPayload = {
         products: validProducts.map(p => ({
           name: p.name,
@@ -392,7 +407,8 @@ export default function ProductForm() {
                 setEmail(selectedSupplier.email)
                 setPhone(selectedSupplier.phone || '')
                 setAddress(selectedSupplier.address || '')
-
+              setSupplier(selectedSupplier)
+              // alert(JSON.stringify(selectedSupplier))
                 // Agrega otros setState según lo que tengas en tu modelo
               }
             }}
@@ -417,100 +433,40 @@ export default function ProductForm() {
         </div>
 
         {/* Estado */}
-        <div className="flex items-center justify-between bg-slate-50 min-h-14 px-4 rounded-xl">
+        {/* <div className="flex items-center justify-between bg-slate-50 min-h-14 px-4 rounded-xl">
           <span className="text-[#0d151c] text-base">¿Activo?</span>
           <Switch checked={isActive} onCheckedChange={setIsActive} />
-        </div>
-
-        {/* Nombre */}
+        </div> */}
         <div>
-          <label className="block mb-1 text-sm font-medium text-[#0d151c]">Empresa</label>
-          <label>
-            {name}
-          </label>
-          {/* // value={name} */}
-          {/* // onChange={(e) => setName(e.target.value)} */}
-          {/* // placeholder="Nombre de la empresa proveedor" */}
-          {/* // required */}
-          {/* /> */}
-
+          {supplier && <ProviderData data={supplier} />}
         </div>
 
-        {/* ContactName */}
-        <div>
-          <label className="block mb-1 text-sm font-medium text-[#0d151c]">Contacto Ventas</label>
-          {/* <Input
-            // type="text"
-            value={contactName}
-            onChange={(e) => setContactName(e.target.value)}
-            placeholder="Contacto"
-            // min={0}
-            // step={0.01}
-            required
-          /> */}
-          <label>
-            {contactName}
-          </label>
-        </div>
-
-        {/* Email */}
-        <div>
-          <label className="block mb-1 text-sm font-medium text-[#0d151c]">Email</label>
-          {/* <Input
-            // type="number"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email proveedor"
-            // min={0}
-            required
-          /> */}
-          <label>
-            {email}
-          </label>
-        </div>
-
-        {/* Phone */}
-        <div>
-          <label className="block mb-1 text-sm font-medium text-[#0d151c]">Phone</label>
-          {/* <Input
-            // type="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="Phone"
-            // min={0}
-            required
-          /> */}
-          <label>
-            {phone}
-          </label>
-        </div>
-
-        {/* Descripción */}
-        <div>
-          <label className="block mb-1 text-sm font-medium text-[#0d151c]">Dirección</label>
-          {/* <Textarea
-            value={address}
-            // onChange={(e) => setAddress(e.target.value)}
-            placeholder="Dirección del proveedor"
-            rows={3}
-          /> */}
-          <label>
-            {address}
-          </label>
-        </div>
-
+    
+<div>
+  {selectedSupplierId === null && (
+    <p className="text-sm text-red-600">Por favor, selecciona un proveedor para continuar.</p>
+  )}
+</div>
 
       </section>
 
       {/* Imagen */}
       {/* Categoria Product */}
-      <section>
+      {selectedSupplierId!=null && (
+<div className='flex flex-col lg:flex-row gap-6 w-full'>
+
+
+   <section>
+        {/* You can render supplier.name or another property if needed */}
+        {/* {supplier?.name} */}
+        {/* {supplierId !=""} */}
         <ProductTabs onProductUpdate={(updatedProduct) => {
 
-
+          alert(selectedSupplierId)
             setCart((prev) => [...prev, updatedProduct]); // o reemplazar si ya existe
           
-        }}>
+        }
+        }  supplierId={Number(selectedSupplierId)}>
           <section className="flex flex-col items-center gap-4 max-w-[960px] w-full">
             <div className='w-full'>
               <label className="block text-sm font-medium text-[#0d151c] mb-1">Crear Categoría</label>
@@ -659,9 +615,7 @@ export default function ProductForm() {
         </ProductTabs>
       </section>
 
-
-
-      <section>
+            <section>
         {/* Cart Section */}
         <div className="space-y-4">
           <Card>
@@ -742,6 +696,13 @@ export default function ProductForm() {
           </Card>
         </div>
       </section>
+</div>
+      )}
+   
+
+
+
+
     </form>
   )
 }

@@ -5,11 +5,13 @@ import { Product } from '@/services/product-service';
 
 type ProductTabsProps = {
   children: React.ReactNode;
-  onProductUpdate: (product: Product) => void;
+  onProductUpdate: (product: Product
+  ) => void;
+  supplierId?:number;
 };
 
 export default function ProductTabs({
-  children,onProductUpdate
+  children,onProductUpdate,supplierId
 }: ProductTabsProps) {
   return (
     <Tabs.Root defaultValue="create" className="w-full max-w-4xl mx-auto">
@@ -36,7 +38,7 @@ export default function ProductTabs({
 
       <Tabs.Content value="update" className="pt-6">
         {/* Aquí va tu sección de actualización */}
-        <UpdateProductsSection onSubmitUpdate={onProductUpdate} />
+        <UpdateProductsSection onSubmitUpdate={onProductUpdate} subplierID={supplierId}  />
         
       </Tabs.Content>
     </Tabs.Root>

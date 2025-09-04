@@ -3,7 +3,7 @@
 
 import { createClient } from '@/services/client-service';
 import * as RadioGroup from '@radix-ui/react-radio-group';
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ClientCardProps {
   onClientCreated?: (name: string, id: number, selected: string) => void;
@@ -17,6 +17,7 @@ export default function ClientCard({ onClientCreated }: ClientCardProps) {
   let createdName = formData.name || 'Cliente por defecto';
   useEffect(() => {
     console.log('Selected changed to:', selected);
+    console.log('Selected changed to:', id);
 
   });
 
