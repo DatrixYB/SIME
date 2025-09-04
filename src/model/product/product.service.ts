@@ -73,6 +73,24 @@ export class ProductService {
       );
     }
   }
+  async findAllBySupplier(supId: number) {
+console.log("SERVICE SUPPLIER ID",supId)
+console.log("TYPEOF SERVICE SUPPLIER ID",typeof supId)
+    try{
+      const products = await this.prisma.product.findMany(
+        {
+        where: { supplierId: supId },
+     
+      }
+    );
+      return products
+    }catch(error){
+       throw new InternalServerErrorException(
+        `Error en el ${this.Name} findAllbySupplier`,
+      );
+    }
+
+  }
 
   async findOne(id: number) {
     const client = await this.prisma.product.findUnique({ where: { id } });
