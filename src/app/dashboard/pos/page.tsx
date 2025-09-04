@@ -391,7 +391,7 @@ export default function POSPage() {
                         />
                         {cashReceived !== null && (
                           <p className="text-center text-muted-foreground py-2">
-                            Devuelto: <span className="font-semibold">${change < 0 ? 0 : change.toFixed(2)}</span>
+                            Devuelto: <span className="font-semibold">${change !== null ? (change < 0 ? 0 : change.toFixed(2)) : "0.00"}</span>
                           </p>
                         )}
                       </div>
