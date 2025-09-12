@@ -124,10 +124,10 @@ export default function POSPage() {
     }
 
     try {
-      alert(JSON.stringify(payloadPayment))
+      // alert(JSON.stringify(payloadPayment))
       const selectMethod = await createPayment(payloadPayment)
       console.log("selectMethod", selectMethod.id)
-      alert("selectMethod" + JSON.stringify(selectMethod.id))
+      // alert("selectMethod" + JSON.stringify(selectMethod.id))
       if (!selectMethod.id) {
         console.error("Error creating payment method");
         return;
@@ -152,10 +152,10 @@ export default function POSPage() {
       //  }
 
       setOrder(order + 1)
-      alert("PAYLOADSALE")
-      alert(JSON.stringify(payloadSale))
+      // alert("PAYLOADSALE")
+      // alert(JSON.stringify(payloadSale))
       const saleOrderCreated = await createSale(payloadSale)
-      alert(saleOrderCreated)
+      // alert(saleOrderCreated)
       const productsPayload = {
         products: cart.map(p => ({
           id: p.id,
@@ -172,7 +172,7 @@ export default function POSPage() {
           quantity: productsPayload.products[0].quantity,
           price: productsPayload.products[0].price,
         }
-        alert(JSON.stringify(saleorder_item_payload))
+        // alert(JSON.stringify(saleorder_item_payload))
         await createSaleItem(saleorder_item_payload)
       } else if (cart.length > 1) {
         const saleorder_item_payload: SaleOrderItems = {
@@ -183,7 +183,7 @@ export default function POSPage() {
             price: product.price + product.price * 1.16               // Precio individual
           }))
         };
-        alert(JSON.stringify(saleorder_item_payload))
+        // alert(JSON.stringify(saleorder_item_payload))
         await createSaleOrderItems(saleorder_item_payload)
       } else {
         console.log('No hay productos válidos para crear');

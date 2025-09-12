@@ -67,6 +67,8 @@ export const createProduct = async (payload: CreateProductDto): Promise<Product>
 }
 // Crear nuevo producto
 export const createProducts = async (payload: CreateProductDto[]): Promise<Product[]> => {
+  console.log('Payload to create products:', payload)
+  // alert('Payload to create products:\n' + JSON.stringify(payload, null, 2))
   const { data } = await axiosClient.post('/products/bulk', payload)
   return data
 }

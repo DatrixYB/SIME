@@ -5,8 +5,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import '@radix-ui/themes/styles.css';
-import { Footer } from "@/components/landing/footer";
-import { Header } from "@/components/landing/header"
+
 // import { Theme } from '@radix-ui/themes';
 
 

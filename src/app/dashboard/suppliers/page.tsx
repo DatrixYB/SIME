@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Plus, Trash2, Search, Phone, Mail } from "lucide-react"
 import { delSupplierById, getSuppliers , Supplier, updateSupplier} from "@/services/supplier-service"
@@ -51,13 +50,16 @@ export default function SuppliersPage() {
     alert(supplier.name + " agregado correctamente");
           try {
     
+      if (supplier.id === undefined) {
+        throw new Error("Supplier ID is undefined");
+      }
       await updateSupplier(supplier.id, supplier);
-       const suppliersData:Supplier[] = await getSuppliers();
+      const suppliersData:Supplier[] = await getSuppliers();
       console.log("Fetched suppliers:", suppliersData);
       setSuppliers(suppliersData);
-    
+
     } catch (error) {
-      console.error("Error deleting supplier:", error)
+      console.error("Error updating supplier:", error)
       
     }
   };
@@ -109,7 +111,7 @@ export default function SuppliersPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {suppliers.reduce((total, supplier) => total + supplier.totalProducts, 0)}
+              {suppliers.reduce((total, supplier) => total + (supplier.totalProducts ?? 0), 0)}
             </div>
             <p className="text-xs text-muted-foreground">En catálogo</p>
           </CardContent>
@@ -171,7 +173,7 @@ export default function SuppliersPage() {
                   <TableCell>
                     <div className="flex space-x-2">
                       {/* <Button variant="outline" size="sm"> */}
-                         <AddSupplierDialog onAddSupplier={handleUpdateSupplier}  data ={supplier}/>
+                         <AddSupplierDialog onAddSupplier={handleUpdateSupplier}  data={{ ...supplier, phone: supplier.phone ?? "", address: supplier.address ?? "" }}/>
                       {/* </Button> */}
                       <Button variant="outline" size="sm" onClick={() => handleDeleteSupplier(supplier.id)}>
                         <Trash2 className="h-4 w-4" />

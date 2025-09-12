@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -5,10 +6,10 @@ import type { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import * as Label from "@radix-ui/react-label";
-import Image from "next/image";
+// import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import GoogleIcon from "@/public/Logo_google_g_icon.svg";
+// import GoogleIcon from "@/public/Logo_google_g_icon.svg";
 import { getUserSignIn } from "@/services/auth-service";
 
 type SignInForm = {
@@ -65,8 +66,8 @@ export default function SignInForm() {
       setLoading(true);
 
       // Flujo NextAuth (credentials) con redirect manual para capturar errores
-      console.log("Iniciando sesión con:", JSON.stringify(form))
-      alert("Iniciando sesión con: " + JSON.stringify(form))
+      // console.log("Iniciando sesión con:", JSON.stringify(form))
+      // alert("Iniciando sesión con: " + JSON.stringify(form))
       // const result = await signIn("credentials", {
       //   email: form.email,
       //   password: form.password,
@@ -77,32 +78,25 @@ const result = await getUserSignIn(form)
       
       // const result = true
 
-      if (!result) {
-        throw new Error("No se pudo procesar la solicitud.");
-      }
-      if (!result.success) {
+if (!result) {
+  throw new Error("No se pudo procesar la solicitud.");
+}
+if (!result.success) {
   setErrorMsg(result.message || "Credenciales incorrectas.");
   setNotice({ type: "error", message: result.message || "Credenciales incorrectas." });
   return;
 }
-      if (result.error) {
-        // Mensajes comunes que NextAuth suele exponer (puede variar según tu authorize)
-        const msg =
-          result.error === "CredentialsSignin"
-            ? "Correo o contraseña incorrectos."
-            : result.error;
-        setErrorMsg(msg);
-        setNotice({ type: "error", message: msg });
-        return;
-      }
 
       setSuccessMsg("Has iniciado sesión correctamente. Redirigiendo…");
       setNotice({ type: "success", message: "Inicio de sesión exitoso." });
 
       // Redirección controlada (ajusta destino)
       router.push("/dashboard");
-    } catch (err: any) {
-      const msg = err?.message || "Ocurrió un error inesperado.";
+    } catch (err: unknown) {
+      let msg = "Ocurrió un error inesperado.";
+      if (err && typeof err === "object" && "message" in err && typeof (err as { message?: unknown }).message === "string") {
+        msg = (err as { message: string }).message;
+      }
       setErrorMsg(msg);
       setNotice({ type: "error", message: msg });
     } finally {

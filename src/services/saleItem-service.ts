@@ -26,14 +26,14 @@ export const getSaleItem = async (): Promise<SaleItem> => {
 export const createSaleItem = async (
   payload: Omit<SaleItem, 'id' | 'product' | 'sale'>
 ): Promise<SaleItem> => {
-  alert(JSON.stringify(payload))
+  // alert(JSON.stringify(payload))
   const { data } = await axiosClient.post('/sale-item', payload)
   return data
 }
 export const createSaleOrderItems = async (
   payload: Omit<SaleOrderItems, 'id'>
 ): Promise<SaleOrderItems> => {
-  alert(JSON.stringify(payload))
+  // alert(JSON.stringify(payload))
   const { data } = await axiosClient.post('/sale-item/bulk', payload)
   return data
 }

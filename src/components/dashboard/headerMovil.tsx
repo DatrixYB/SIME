@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
-import { ArrowRight, MenuIcon } from 'lucide-react';
+import {  MenuIcon } from 'lucide-react';
 // import ArrowRight from "@/assets/arrow-right.svg";
 // import Logo from "@/assets/logo40.svg";
 // import MenuIcon from "@/assets/MenuIcon.svg";

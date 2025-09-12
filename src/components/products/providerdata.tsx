@@ -19,6 +19,9 @@ export default function providerdata({ data }: { data: Supplier }) {
                   <label>
                     {data.name}
                   </label>
+                  <label htmlFor="">
+                    {name}
+                  </label>
                   {/* // value={name} */}
                   {/* // onChange={(e) => setName(e.target.value)} */}
                   {/* // placeholder="Nombre de la empresa proveedor" */}

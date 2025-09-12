@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
 import { useEffect, useState } from "react"
@@ -7,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Plus, Edit, Trash2, Search } from "lucide-react"
+import { Plus, Search } from "lucide-react"
 import { getProducts, Product } from "@/services/product-service"
 
 import Link from 'next/link'
@@ -25,18 +27,6 @@ export default function ProductsPage() {
     // Estado para productos
 const [products, setProducts] = useState<Product[]>([])
  
-useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const productsData:Product[] = await getProducts();
-        console.log("Fetched products:", productsData);
-        setProducts(productsData);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    }
-    fetchProducts();
-  }, []);
 
 
 
@@ -67,6 +57,9 @@ useEffect(() => {
       supplier: newProduct.supplier,
       // status: "active",
       isActive: true,
+      id: 0,
+      categoryId: 0,
+      supplierId: 0
     }
     setProducts([...products, product])
     setNewProduct({ name: "", category: "", price: "", stock: "", minStock: "", supplier: "" })
@@ -88,6 +81,19 @@ useEffect(() => {
   // if (loading) return <p>Cargando productos...</p>;
   // if (error) return <p>Error al cargar productos: {error}</p>;
   // console.log(Products);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const productsData:Product[] = await getProducts();
+        console.log("Fetched products:", productsData);
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    }
+    fetchProducts();
+  }, []);
+
   return (
     <div className="space-y-6 ">
       <div className="flex items-center justify-between">

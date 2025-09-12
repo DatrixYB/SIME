@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // "use-server"
 // import { getUserSignIn } from '@/services/auth-service'
 // import NextAuth, { NextAuthOptions } from 'next-auth'
@@ -106,10 +107,8 @@
 // Third-party Imports
 import CredentialProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
-import { PrismaAdapter } from '@auth/prisma-adapter'
-import { PrismaClient } from '@prisma/client'
+
 import type { NextAuthOptions } from 'next-auth'
-import type { Adapter } from 'next-auth/adapters'
 import { cookies } from 'next/headers'
 import { getUserSignIn } from '@/services/auth-service'
 
@@ -140,12 +139,16 @@ export const authOptions: NextAuthOptions = {
          * You can also use the `req` object to obtain additional parameters (i.e., the request IP address)
          */
         const { email, password } = credentials as { email: string; password: string }
-
+        console.log(email,password)
         try {
           // ** Login API Call to match the user credentials and receive user data in response along with his role
           const url = process.env.API_URL
           console.log(url)
-                  const res = await getUserSignIn(credentials)
+                  if (!credentials) {
+                    throw new Error('No credentials provided')
+                  }
+                  const { email, password } = credentials as { email: string; password: string }
+                  const res = await getUserSignIn({ email, password })
 
           // const res = await fetch(`${process.env.API_URL}/login`, {
           //   method: 'POST',
@@ -155,23 +158,24 @@ export const authOptions: NextAuthOptions = {
           //   body: JSON.stringify({ email, password })
           // })
 
-          const data = await res.json()
+          // If getUserSignIn returns the user data directly:
+          const data = res;
           console.log(data);
           console.log("JSON");
-          if (res.status === 401) {
+          if (data.status === 401) {
             throw new Error(JSON.stringify(data))
           }
 
-          if (res.status === 200) {
+          if (data.status === 200 || data.access_token) {
             /*
              * Please unset all the sensitive information of the user either from API response or before returning
              * user data below. Below return statement will set the user object in the token and the same is set in
              * the session which will be accessible all over the app.
              */
 
-            let cookieStore = await cookies()
-            cookieStore.set('access_token', data.access_token, { path: '/', httpOnly: true, sameSite: 'lax' })
-            cookieStore.set('refresh_token', data.refresh_token, { path: '/', httpOnly: true, sameSite: 'lax' })
+            const cookieStore = await cookies()
+            cookieStore.set('access_token', String(data.access_token), { path: '/', httpOnly: true, sameSite: 'lax' })
+            cookieStore.set('refresh_token', String(data.refresh_token), { path: '/', httpOnly: true, sameSite: 'lax' })
 
 
             return data

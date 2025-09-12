@@ -39,9 +39,9 @@ export default function AddUserDialog({ onAddUser, data }: Props) {
   const handleSubmit = async () => {
     if (typeof onAddUser === "function") {
       onAddUser(newSupplier);
-      alert(newSupplier+"dialog")
+      // alert(newSupplier+"dialog")
     }
-    alert(JSON.stringify( newSupplier)+"not")
+    // alert(JSON.stringify( newSupplier)+"not")
     if (typeof data.id === "number") {
       await updateUser(data.id, newSupplier);
     } else {

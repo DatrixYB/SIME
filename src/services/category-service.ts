@@ -30,6 +30,6 @@ export const updateCategory = async (id: number, payload: Partial<Category>): Pr
 }
 
 export const deleteCategory = async (id: string): Promise<void> => {
-  alert(id)
+  // alert(id)
   await axiosClient.delete(`/Category/${id}`)
 }

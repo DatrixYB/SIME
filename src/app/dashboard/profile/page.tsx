@@ -22,7 +22,7 @@ function isValidImageUrl(url?: string): boolean {
 }
 export default function ProfilePage() {
 
-  const [isActive, setIsActive] = useState(false)
+  // const [isActive, setIsActive] = useState(false)
 
   const [users, setUsers] = useState<User[]>([])
   const [searchTerm, setSearchTerm] = useState("")
@@ -36,9 +36,9 @@ export default function ProfilePage() {
   const filteredUsers = users.filter((user) =>
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
   )
-   const handleUpdateSupplier = async (user) => {
+   const handleUpdateSupplier = async (user:  User) => {
     // Aquí va tu lógica para agregar el proveedor, ej. POST a tu API
-    alert(user + " agregado correctamente");
+    // alert(user + " agregado correctamente");
           try {
     
        const suppliersData:User[] = await getUsers();
@@ -116,7 +116,7 @@ export default function ProfilePage() {
     
                     {isValidImageUrl(user.image) ? (
   <Image
-    src={user.image}
+    src={user.image || ""}
     width={40}
     height={40}
     className="h-8 w-8 rounded-full object-cover"
@@ -133,7 +133,7 @@ export default function ProfilePage() {
                       {user.role}
                     </Badge>
                   </TableCell>
-                  <TableCell className="hidden lg:table-cell">{new Date(user.createdAt).toLocaleDateString()}</TableCell>
+                  <TableCell className="hidden lg:table-cell">{user.createdAt ? new Date(user.createdAt).toLocaleDateString() : "Sin fecha"}</TableCell>
                   <TableCell>
                     <div className="flex space-x-2">
                       {/* <Button variant="outline" size="sm">
@@ -142,7 +142,14 @@ export default function ProfilePage() {
                     {/* <AddUserDialog onAddSupplier={handleUpdateSupplier}  data ={user}/> */}
                     <AddUserDialog onAddSupplier={handleUpdateSupplier}  data ={user} />
      
-                      <Button variant="outline" size="sm" onClick={() => handleDeleteUser(user.id)}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          if (user.id !== undefined) handleDeleteUser(user.id)
+                        }}
+                        disabled={user.id === undefined}
+                      >
                         <Trash2 className="h-4 w-4" />
                       </Button>
                           {/* <Button

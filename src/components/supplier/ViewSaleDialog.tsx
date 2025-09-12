@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Edit, Eye } from "lucide-react";
+import { Eye } from "lucide-react";
 import { getSaleById, Sale } from "@/services/sale-service";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,19 +21,36 @@ interface Props {
 
 export default function ViewSaleDialog({ data }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [saleId, setSaleId] = useState([]);
+  const [saleId, setSaleId] = useState<{
+    id: number;
+    product: { name: string; quantity: number; price: number }[];
+    total: number;
+    statusSale: 'PENDING' | 'COMPLETED' | 'FAILED';
+  } | null>(null);
 
   useEffect(() => {
     const fetchSales = async () => {
       try {
-        const saleData = await getSaleById(data.id);
-        setSaleId(saleData);
+        if (typeof data.id === "number") {
+          const saleData = await getSaleById(data.id);
+          // Transform saleData to match the expected SaleTable shape
+          setSaleId({
+            id: saleData.id ?? 0,
+            product: saleData.product || [], // use the correct property name from Sale type
+            total: saleData.total,
+            statusSale: saleData.statusSale === "PENDING" || saleData.statusSale === "COMPLETED" || saleData.statusSale === "FAILED"
+              ? saleData.statusSale
+              : "PENDING",
+          });
+        } else {
+          console.error("Invalid sale id:", data.id);
+        }
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
     fetchSales();
-  }, []);
+  }, [data.id]);
 
   const handleSubmit = async () => {
     setIsOpen(false);
@@ -67,7 +84,7 @@ export default function ViewSaleDialog({ data }: Props) {
             </div>
           </CardHeader>
           <CardContent className="overflow-x-auto">
-            <SaleTable sale={saleId} />
+            {saleId && <SaleTable sale={saleId} />}
           </CardContent>
         </Card>
 

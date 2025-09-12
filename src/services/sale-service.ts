@@ -55,7 +55,7 @@ export const getSaleById = async (id: number): Promise<Sale> => {
 
 export const createSale = async (payload: Omit<Sale, 'id'>): Promise<Sale> => {
   console.log("payload", payload)
-  alert("payload"+JSON.stringify(payload))
+  // alert("payload"+JSON.stringify(payload))
   const { data } = await axiosClient.post('/sales', payload)
   return data
 }

@@ -50,7 +50,7 @@ export const getUserById = async (id: number): Promise<User> => {
 }
 
 export const createUserSignUp = async (payload: Omit<User, 'id' | 'createdAt' | 'updatedAt'>): Promise<User> => {
-    alert("create"+JSON.stringify(payload))
+    // alert("create"+JSON.stringify(payload))
   console.log("payload service PAY", payload)
   const { data } = await axiosClient.post('/auth/register',  { email:payload.email, name:payload.name, password:payload.password, code:payload.code ,role:UserRole.ADMIN})
   return data

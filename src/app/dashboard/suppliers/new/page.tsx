@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Switch } from '@/components/ui/switch'
+// import { Switch } from '@/components/ui/switch'
 import Link from 'next/link'
 import { Button } from '@radix-ui/themes'
 import { MoveLeft } from 'lucide-react'
@@ -22,7 +22,7 @@ export default function SupplierForm() {
   const [address, setAddress] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState<string | ''>('')
-  const [isActive, setIsActive] = useState(true)
+  // const [isActive, setIsActive] = useState(true)
 
 
   useEffect(() => {
@@ -74,10 +74,10 @@ export default function SupplierForm() {
 
 
         {/* Estado */}
-        <div className="flex items-center justify-between bg-slate-50 min-h-14 px-4 rounded-xl">
+        {/* <div className="flex items-center justify-between bg-slate-50 min-h-14 px-4 rounded-xl">
           <span className="text-[#0d151c] text-base">¿Activo?</span>
           <Switch checked={isActive} onCheckedChange={setIsActive} />
-        </div>
+        </div> */}
 
         {/* Nombre */}
         <div>

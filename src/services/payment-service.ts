@@ -1,5 +1,4 @@
 import axiosClient from '@/lib/bootstrap'
-import { SaleStatus } from './sale-service'
 
 export enum PaymentType {
   CASH = 'CASH',

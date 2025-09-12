@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // Define la URL base según entorno
 const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api'
-
+console.log(baseURL)
 // Crea instancia de cliente Axios
 const axiosClient = axios.create({
   baseURL,

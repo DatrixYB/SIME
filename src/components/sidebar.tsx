@@ -4,11 +4,10 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { BarChart3, Home, Package, ShoppingCart, Users, FileText, Settings, Store } from "lucide-react"
 // import AccessibilityPanel from "./utils/accesibility"
 import SIME from "./../../public/LogoSIME.svg";
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import { useUser } from "@/hooks/context/user-context"
 import { getNavigationByRole } from "@/components/utils/roleNavigation"
 

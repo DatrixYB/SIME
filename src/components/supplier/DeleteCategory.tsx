@@ -8,8 +8,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Delete, Eye } from "lucide-react";
-import { deleteCategory, getCategory } from "@/services/category-service";
+import { Delete } from "lucide-react";
+import { deleteCategory} from "@/services/category-service";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -36,7 +36,7 @@ export default function DeleteCategoryDialog({catego}) {
   const handleSubmit = async () => {
     await Promise.all(
       selectedToDelete.map(async (category) => {
-        alert(category)
+        // alert(category)
         await deleteCategory(category);
       })
     );

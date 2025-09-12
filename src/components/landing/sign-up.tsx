@@ -4,9 +4,9 @@ import { useState, FormEvent } from "react";
 import * as Label from "@radix-ui/react-label";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import * as Separator from "@radix-ui/react-separator";
-import Image from "next/image";
-import { signIn } from "next-auth/react";
-import GoogleIcon from "@/public/Logo_google_g_icon.svg";
+// import Image from "next/image";
+// import { signIn } from "next-auth/react";
+// import GoogleIcon from "@/public/Logo_google_g_icon.svg";
 import { createUserSignUp} from "@/services/auth-service";
 import { Card } from "@radix-ui/themes";
 import Link from "next/link";
@@ -71,8 +71,12 @@ export function SignUp() {
       //   redirect: true,
       //   callbackUrl: "/",
       // });
-    } catch (err: any) {
-      setErrorMsg(err.message || "Ocurrió un error inesperado.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setErrorMsg(err.message || "Ocurrió un error inesperado.");
+      } else {
+        setErrorMsg("Ocurrió un error inesperado.");
+      }
     } finally {
       setLoading(false);
     }
@@ -99,8 +103,8 @@ export function SignUp() {
         <div className="mt-6 rounded-lg border border-zinc-200 bg-white p-4 text-sm text-zinc-700 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
           <p className="font-medium">Demo rápida</p>
           <p className="mt-1">
-            Email: <span className="font-semibold">admin@materialize.com</span> · Pass:{" "}
-            <span className="font-semibold">admin</span>
+            Email: <span className="font-semibold">admin@sime.com</span> · Pass:{" "}
+            <span className="font-semibold">admin123</span>
           </p>
         </div>
       </div>

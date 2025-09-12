@@ -1,13 +1,11 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Bell, Search, User } from "lucide-react"
+import {  User } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -16,6 +14,7 @@ import { logOut } from "@/services/auth-service"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useUser } from "@/hooks/context/user-context"
+import NotificationBell from "./utils/belll"
 
 export function Header() {
    const { user } = useUser();
@@ -24,7 +23,6 @@ export function Header() {
   useEffect(() => {
 
   }, [])
-
   const handleLogout = async () => {
 
     await logOut();
@@ -43,9 +41,11 @@ export function Header() {
         <div className="flex items-center space-x-4">
                                   <AccessibilityPanel/>
 
-          <Button variant="ghost" size="icon">
-            <Bell className="h-5 w-5" />
-          </Button>
+
+
+<NotificationBell>
+  
+</NotificationBell>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

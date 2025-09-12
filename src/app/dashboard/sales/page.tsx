@@ -1,13 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, Download, TrendingUp, DollarSign, ShoppingCart } from "lucide-react"
+import { Search, TrendingUp, DollarSign, ShoppingCart } from "lucide-react"
 import { getSales, Sale, SaleStatus } from "@/services/sale-service"
 
 import ViewSaleDialog from "@/components/supplier/ViewSaleDialog"
@@ -184,7 +183,7 @@ useEffect(() => {
       {filteredSales.map((sale) => (
         <TableRow key={sale.id}>
           <TableCell className="font-medium">#{sale.id}</TableCell>
-          <TableCell>{sale.client}</TableCell>
+          <TableCell>{sale.client?.name ?? "Sin cliente"}</TableCell>
           <TableCell className="hidden sm:table-cell font-medium">
             ${sale.total.toFixed(2)}
           </TableCell>

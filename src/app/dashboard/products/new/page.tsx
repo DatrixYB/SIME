@@ -16,7 +16,7 @@ import { Button, Card, Separator } from '@radix-ui/themes'
 import { CreditCard, Delete, MoveLeft, PackageSearch, Plus } from 'lucide-react'
 import { getSuppliers, Supplier } from '@/services/supplier-service'
 import { Category, createCategory, getCategory } from '@/services/category-service'
-import { createProduct, createProducts, Product } from '@/services/product-service'
+import { createProduct, createProducts, Product, updateProduct } from '@/services/product-service'
 import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { createPurchaseOrder, OrderStatus, PurchaseOrder } from '@/services/purchaseOrder-service'
 import { createPurchaseOrderItem, createPurchaseOrderItems } from '@/services/purchaseOrderItem-service'
@@ -25,6 +25,7 @@ import { useUser } from '@/hooks/context/user-context'
 import DeleteCategoryDialog from '@/components/supplier/DeleteCategory'
 import ProductTabs from '@/components/utils/tabs'
 import ProviderData from '@/components/products/providerdata'
+import Image from 'next/image'
 
 interface CartItem extends Product {
   quantity: number
@@ -210,7 +211,7 @@ if (existingItemIndex !== -1) {
   setCart([...cart, newProduct])
 }
     setSelectedProduct(selectedProduct + 1) // opcional
-    alert('Producto agregado al carrito correctamente')
+    // alert('Producto agregado al carrito correctamente')
   }
 
 
@@ -238,9 +239,9 @@ if (existingItemIndex !== -1) {
 
   const handleCheckout = async () => {
     alert(`Venta procesada por $${getTotalAmount().toFixed(2)}\n total items: ${getTotalItems()}`)
-    alert(cart)
+    // alert(cart)
     console.log('Orden creado con éxito\n' + JSON.stringify(cart, null, 2));
-    alert(JSON.stringify(user))
+    // alert(JSON.stringify(user))
     // Aquí enviarías a backend
     const orderPayload: PurchaseOrder = {
       supplierId: Number(supplierId),
@@ -282,17 +283,18 @@ if (existingItemIndex !== -1) {
         image: item.image,
         isActive: item.isActive,
         supplierId: item.supplierId,
-        categoryId: item.categoryId
+        categoryId: item.categoryId,
+        id: item.id
       };
     }
     try {
-      alert("Order create")
+      // alert("Order create")
       console.log('Orden creado con éxito\n' + JSON.stringify(orderPayload, null, 2));
 
       const orderCreated = await createPurchaseOrder(orderPayload)
       const validProducts = cart.map(item => validateProduct(item));
-      alert('Productos validados y listos para enviar al backend:\n' + JSON.stringify(validProducts, null, 2))
-      alert('Order:\n' + JSON.stringify(orderCreated, null, 2))
+      // alert('Productos validados y listos para enviar al backend:\n' + JSON.stringify(validProducts, null, 2))
+      // alert('Order:\n' + JSON.stringify(orderCreated, null, 2))
       console.log('Productos validados y listos para enviar al backend:\n' + JSON.stringify(validProducts, null, 2))
 
       const productsPayload = {
@@ -306,13 +308,16 @@ if (existingItemIndex !== -1) {
           isActive: Boolean(p.isActive ?? true),
           supplierId: Number(p.supplierId),
           categoryId: Number(p.categoryId),
+          id:Number(p.id)?? 0
         })),
       };
 
-      if (validProducts.length === 1) {
-        alert(validProducts.length)
-        alert('Payload de productos para crear uno solo:\n' + JSON.stringify(productsPayload, null, 2))
-        const productCreated = await createProduct(productsPayload.products[0]);
+      if (validProducts.length === 1 && validProducts[0].isActive== true) {
+        // alert(validProducts.length)
+        // alert('Payload de productos para crear uno solo:\n' + JSON.stringify(productsPayload, null, 2))
+        const { id, ...dataPayload } = productsPayload.products[0]
+
+        const productCreated = await createProduct(dataPayload);
         const puchaseorder_item_payload = {
           orderId: orderCreated.id,
           productId: productCreated,
@@ -320,10 +325,11 @@ if (existingItemIndex !== -1) {
           unitPrice: productsPayload.products[0].price,
         }
         await createPurchaseOrderItem(puchaseorder_item_payload)
-      } else if (validProducts.length > 1) {
+      } else if (validProducts.length > 1 ) {
         const productsPayloadapi = JSON.stringify(productsPayload);
         console.log('Payload de productos para crear múltiples:', productsPayloadapi);
-        alert('Payload de productos para crear múltiples:');
+        // alert('Payload de productos para crear múltiples:');
+        const dataPayloadArray = productsPayload.products.map(({ id, ...rest }) => rest)
         const productsCreated = await createProducts(productsPayload);
         const purchaseorder_item_payload = {
           orderId: orderCreated.id,
@@ -333,8 +339,22 @@ if (existingItemIndex !== -1) {
             unitPrice: product.price                // Precio individual
           }))
         };
-        alert(JSON.stringify(purchaseorder_item_payload))
+        // alert(JSON.stringify(purchaseorder_item_payload))
         await createPurchaseOrderItems(purchaseorder_item_payload)
+      }else if (validProducts.length === 1 && validProducts[0].isActive== false){
+     alert(validProducts.length)
+        // alert('Payload de productos para UPDATE uno solo:\n' + JSON.stringify(productsPayload, null, 2))
+        const { id, ...dataUpdatePayload } = productsPayload.products[0]
+        // alert(JSON.stringify(id))
+        // alert(JSON.stringify(dataUpdatePayload))
+        const productCreated = await updateProduct(id,dataUpdatePayload);
+        const puchaseorder_item_payload = {
+          orderId: orderCreated.id,
+          productId: productCreated.id,
+          quantity: productsPayload.products[0].stock,
+          unitPrice: productsPayload.products[0].price,
+        }
+        await createPurchaseOrderItem(puchaseorder_item_payload)
       } else {
         console.log('No hay productos válidos para crear');
       }
@@ -460,13 +480,17 @@ if (existingItemIndex !== -1) {
         {/* You can render supplier.name or another property if needed */}
         {/* {supplier?.name} */}
         {/* {supplierId !=""} */}
+
+        
         <ProductTabs onProductUpdate={(updatedProduct) => {
 
-          alert(selectedSupplierId)
+          // alert(selectedSupplierId)
             setCart((prev) => [...prev, updatedProduct]); // o reemplazar si ya existe
           
         }
-        }  supplierId={Number(selectedSupplierId)}>
+        }  supplierId={Number(selectedSupplierId)} products={
+       
+        supplier?.totalProducts || 0}>
           <section className="flex flex-col items-center gap-4 max-w-[960px] w-full">
             <div className='w-full'>
               <label className="block text-sm font-medium text-[#0d151c] mb-1">Crear Categoría</label>
@@ -594,8 +618,10 @@ if (existingItemIndex !== -1) {
                 className="file:border-0 file:px-4 file:py-2 file:rounded-full file:bg-[#e7edf4] file:text-sm file:font-semibold file:text-[#0d151c]"
               />
               {imagePreview && (
-                <img
+                <Image
                   src={imagePreview}
+                  width={200}
+                  height={200}
                   alt="Vista previa"
                   className="max-w-xs rounded-xl border border-gray-200 shadow"
                 />

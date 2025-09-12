@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { BarChart3, DollarSign, Package, ShoppingCart, Users, AlertTriangle, Calendar } from "lucide-react"
+import { BarChart3, Package, ShoppingCart, Users, AlertTriangle, Calendar } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { get_5_Last_Sales, SaleRecent, SaleStatus } from "@/services/sale-service"

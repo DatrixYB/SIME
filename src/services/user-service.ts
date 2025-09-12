@@ -18,7 +18,13 @@ export type User = {
 }
 
 export const getUsers = async (): Promise<User[]> => {
-  const { data } = await axiosClient.get('/users')
+  const token = localStorage.getItem('token') || ''
+  console.log(token)
+  const { data } = await axiosClient.get('/users'
+    // headers: {
+      // Authorization: `Bearer ${token}`,
+    // },
+  )
   return data
 }
 
@@ -33,7 +39,7 @@ export const createUser = async (payload: Omit<User, 'id' | 'createdAt' | 'updat
 }
 
 export const updateUser = async (id: number, payload: Partial<User>): Promise<User> => {
-  alert(JSON.stringify(payload)+id)
+  // alert(JSON.stringify(payload)+id)
   const { data } = await axiosClient.put(`/users/${id}`, payload)
   return data
 }

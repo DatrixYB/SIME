@@ -41,7 +41,7 @@ function UpdateProductsSection({ onSubmitUpdate ,subplierID}: Props) {
   const [stock, setStock] = useState<number | ''>(0)
   const [minStock, setMinStock] = useState<number>(5)
   const [description, setDescription] = useState('')
-  const [isActive, setIsActive] = useState(true)
+  const [isActive, setIsActive] = useState(false)
   const [categoryId, setCategoryId] = useState<number>(0)
   const [supplierId, setSupplierId] = useState<number | ''>('')
 
@@ -77,7 +77,7 @@ function UpdateProductsSection({ onSubmitUpdate ,subplierID}: Props) {
 
     const fetchProducts = async () => {
       try {
-        alert(subplierID)
+        // alert(subplierID)
         const data: Product[] = await getProductsBySupplier(subplierID || 0)
         console.log('Proveedores obtenidos:', data)
         setProducts(data)
@@ -104,14 +104,19 @@ function UpdateProductsSection({ onSubmitUpdate ,subplierID}: Props) {
       description,
       // image: imageFile ? URL.createObjectURL(imageFile) : null,
       image: imagePreview ? "default" : "",
-      isActive,
+      isActive: false,
       supplierId: Number(supplierId),
       categoryId: categoryId,
       quantity: 1,
     }
+    // 
+    // }
+    // alert("TAB producto a actualizar")
     // alert(JSON.stringify(newProduct))
     onSubmitUpdate(newProduct)
   }
+
+
 
   return (
     <div>UpdateProductsSection
@@ -121,7 +126,7 @@ function UpdateProductsSection({ onSubmitUpdate ,subplierID}: Props) {
           <label className="block text-sm font-medium text-[#0d151c] mb-1">Seleccionar Producto</label>
           <Select value={selectedProduct?.name || ''} onValueChange={(value) => {
             const product = products.find((p) => p.name === value);
-            alert(JSON.stringify(product))
+            // alert(JSON.stringify(product))
             if (product) {
               setSelectedProduct(product.id);
               setNameProduct(product.name);
@@ -151,8 +156,9 @@ function UpdateProductsSection({ onSubmitUpdate ,subplierID}: Props) {
           </Select>
         </div>
         <div>
+<div className='w-full'>
 
-          {/* Nombre */}
+  {/* Nombre */}
           <div className='w-full'>
             <label className="block mb-1 text-sm font-medium text-[#0d151c]">Nombre</label>
             <Input
@@ -196,7 +202,7 @@ function UpdateProductsSection({ onSubmitUpdate ,subplierID}: Props) {
 
           {/* Stock mínimo */}
           <div className='w-full'>
-            <label className="block mb-1 text-sm font-medium text-[#0d151c]">Stock mínimo</label>
+            <label className=" mb-1 text-sm font-medium text-[#0d151c]">Stock mínimo</label>
             <Input
               type="number"
               value={minStock}
@@ -220,6 +226,8 @@ function UpdateProductsSection({ onSubmitUpdate ,subplierID}: Props) {
               rows={3}
             />
           </div>
+</div>
+        
           {/* <div className='gap-3 border-2 border-dashed border-[#cedce8]  rounded-xl p-6 w-full'>
          <h2 className="text-lg font-bold text-center text-[#0d151c]">Imagen del producto</h2>
           <p className="text-sm text-center text-[#0d151c]">Arrastra o haz clic para subir</p>
@@ -245,7 +253,7 @@ function UpdateProductsSection({ onSubmitUpdate ,subplierID}: Props) {
             {/* <Button onClick={() => addToCart()}   disabled={cart.length > 0 && Number(supplierId) !== cart[0].supplierId}> */}
             <Button onClick={() => addToCart()}   >
               <Plus className="h-4 w-4" />
-              Agregar Producto
+              Update Producto
             </Button>
           </div>
         </div>
