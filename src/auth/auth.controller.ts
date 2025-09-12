@@ -19,6 +19,7 @@ import * as jwt from 'jsonwebtoken';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+
   // Registro seguro: 201 Created
   @Post('register')
   async signUp(@Body() dto: SignUpDto, @Res() res: Response) {

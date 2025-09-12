@@ -43,4 +43,6 @@ export class CreateProductDto {
   @IsInt()
   @IsPositive()
   supplierId: number;
+  @IsOptional()
+  id: number;
 }

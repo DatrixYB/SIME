@@ -9,14 +9,45 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
+import { OnModuleInit } from '@nestjs/common'
 
 @Injectable()
-export class UserService {
+export class UserService implements OnModuleInit {
   constructor(private readonly prisma: PrismaService) {}
+  async onModuleInit() {
+    await this.ensureDefaultUser()
+  }
 
   /**
    * Crea un nuevo usuario después de verificar duplicidad y aplicar hash a la contraseña.
-   */
+  //  */
+  // admin@sime.com · Pass: admin123
+  async ensureDefaultUser(): Promise<void> {
+  const defaultEmail = 'admin@sime.com'
+
+  const existingUser = await this.prisma.user.findUnique({
+    where: { email: defaultEmail },
+  })
+
+  if (existingUser) return
+
+  const hashedPassword = await bcrypt.hash('admin123', 10)
+
+  try {
+    await this.prisma.user.create({
+      data: {
+        email: defaultEmail,
+        password: hashedPassword,
+        role: 'ADMIN', // Ajustá según tu enum o tipo
+        name: 'Administrador',
+        image: '', // Opcional
+      },
+    })
+    console.log('✅ Usuario por defecto creado: admin@sime.com')
+  } catch (error) {
+    console.error('❌ Error al crear el usuario por defecto:', error)
+  }
+}
   async create(dto: CreateUserDto): Promise<Omit<User, 'password'>> {
     const { email, password, role,image ,name} = dto;  
 

@@ -25,11 +25,11 @@ export class AuthService {
 
   private async generateTokens(payload: Record<string, any>) {
     const access_token = await this.jwtService.signAsync(payload, {
-      expiresIn: '15s', // 15 minutos
+      expiresIn: '1h', // 15 minutos
     });
 
     const refresh_token = await this.jwtService.signAsync(payload, {
-      expiresIn: '7s', // 7 días
+      expiresIn: '1h', // 7 días
     });
 
     return { access_token, refresh_token };

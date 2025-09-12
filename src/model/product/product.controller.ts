@@ -15,7 +15,6 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductService } from './product.service';
 import { CreateManyProductsDto } from './dto/create-many-product.dto';
-import { Query } from '@nestjs/common';
 
 @Controller('products')
 export class ProductController {
@@ -44,10 +43,10 @@ export class ProductController {
   async findAll() {
     return this.productService.findAll();
   }
-  
+
   @Get('supplier/:id')
   async findAllbySupplier(@Param('id') supplierId: string) {
-    const supId = parseInt(supplierId)
+    const supId = parseInt(supplierId);
     return this.productService.findAllBySupplier(supId);
   }
   @Get('top')

@@ -1,77 +1,105 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="#" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+<p align="center">
+ Sistema Integral para Microempresas (SIME) - Backend desarrollado con <a href="http://nestjs.com" target="_blank">Nest.js</a>.
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<p align="center">
+  <a href="https://www.npmjs.com/package/@nestjs/core" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+  <a href="https://www.npmjs.com/package/@nestjs/core" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+  <a href="https://www.npmjs.com/package/@nestjs/common" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+</p>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Installation
+## Descripción
+
+El backend del sistema **SIME** está desarrollado en **Nest.js** con TypeScript, proporcionando **endpoints RESTful seguros** para autenticación, gestión de usuarios, ventas y productos.
+
+---
+
+## Instalación
+
+Clona el repositorio e instala las dependencias:
 
 ```bash
-$ npm install
+git clone <URL_REPO>
+cd backend
+npm install
 ```
 
-## Running the app
+---
+
+## Ejecución de la aplicación
 
 ```bash
-# development
-$ npm run start
+# Modo desarrollo
+npm run start:dev
 
-# watch mode
-$ npm run start:dev
+# Modo producción
+npm run start:prod
 
-# production mode
-$ npm run start:prod
+# Modo watch (recompila automáticamente)
+npm run start
 ```
 
-## Test
+La aplicación corre por defecto en el puerto **3000**.
 
-## DataBase Seed
+---
+
+## Base de datos y Seed
+
+Si usas **Prisma** o migraciones:
+
 ```bash
+# Ejecutar seed
 npx ts-node prisma/seed.ts
 ```
+
+---
+
+## Pruebas
+
 ```bash
-# unit tests
-$ npm run test
+# Pruebas unitarias
+npm run test
 
-# e2e tests
-$ npm run test:e2e
+# Pruebas end-to-end
+npm run test:e2e
 
-# test coverage
-$ npm run test:cov
+# Cobertura de pruebas
+npm run test:cov
 ```
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Endpoints principales
 
-## Stay in touch
+| Endpoint    | Método | Descripción                         |
+| ----------- | ------ | ----------------------------------- |
+| `/login`    | POST   | Autenticación de usuarios           |
+| `/users`    | GET    | Listado de usuarios (protegido JWT) |
+| `/sales`    | POST   | Registrar una nueva venta           |
+| `/products` | GET    | Consultar productos disponibles     |
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## Soporte
 
-Nest is [MIT licensed](LICENSE).
+Proyecto open source bajo **MIT License**.
+Puedes contribuir o apoyar el proyecto siguiendo las guías de Nest.js: [Nest Support](https://docs.nestjs.com/support).
+
+---
+
+## Mantente en contacto
+
+* Autor: [Breyner Ocampo Cardenas](mailto:datrixyb@gmail.com)
+* Website: [https://sime.com](https://sime.com)
+
+---
+
+## Licencia
+
+Este proyecto está licenciado bajo **MIT License**.

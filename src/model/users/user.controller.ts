@@ -9,15 +9,17 @@ import {
   ParseIntPipe,
   UsePipes,
   ValidationPipe,
+  UseGuards,  Headers
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-
+// import { JwtAuthGuard } from 'src/guard/JwtAuthGuard';
+import { JwtAuthGuard } from 'src/auth/JwtAuthGuard';
+import { JwtService } from '@nestjs/jwt';
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
-
+  constructor(private readonly userService: UserService,private readonly jwtService: JwtService) {}
   /**
    * Crea un nuevo usuario. Valida con class-validator.
    */
@@ -26,10 +28,26 @@ export class UserController {
   async create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
+  @Get('debug-token')
+getToken(@Headers('authorization') authHeader: string) {
+  console.log('🔍 Header Authorization:', authHeader);
+  return { authHeader };
+}
 
+
+
+
+@Get('manual-verify')
+manualVerify(@Headers('authorization') authHeader: string) {
+  const token = authHeader?.split(' ')[1];
+  const payload = this.jwtService.verify(token); // lanza error si está mal
+  console.log('🔍 Payload manual:', payload);
+  return payload;
+}
   /**
    * Devuelve todos los usuarios (campos seguros).
    */
+  // @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     return this.userService.findAll();
