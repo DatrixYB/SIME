@@ -14,7 +14,7 @@ import { logOut } from "@/services/auth-service"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useUser } from "@/hooks/context/user-context"
-import NotificationBell from "./utils/belll"
+import NotificationBell from "./utils/bell"
 
 export function Header() {
    const { user } = useUser();
