@@ -17,7 +17,7 @@ import * as jwt from 'jsonwebtoken';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
 
   // Registro seguro: 201 Created
@@ -27,15 +27,21 @@ export class AuthController {
 
     res.cookie('access_token', access_token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      // secure: process.env.NODE_ENV === 'production',
+      // sameSite: 'strict',
+      secure: true, // obligatorio si SameSite=None
+      sameSite: 'none', // permite envío cross-origin
+
       maxAge: 1000 * 60 * 15, // 15 minutos
     });
 
     res.cookie('refresh_token', refresh_token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      // secure: process.env.NODE_ENV === 'production',
+      // sameSite: 'strict',
+      secure: true, // obligatorio si SameSite=None
+      sameSite: 'none', // permite envío cross-origin
+
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
     });
 
@@ -57,28 +63,34 @@ export class AuthController {
 
     res.cookie('access_token', access_token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      // secure: process.env.NODE_ENV === 'production',
+      secure: true, // obligatorio si SameSite=None
+      sameSite: 'none', // permite envío cross-origin
+
+      // sameSite: 'strict',
       maxAge: 1000 * 60 * 15, // 15 minutos
     });
 
     res.cookie('refresh_token', refresh_token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      // secure: process.env.NODE_ENV === 'production',
+      secure: true, // obligatorio si SameSite=None
+      sameSite: 'none', // permite envío cross-origin
+
+      // sameSite: 'strict',
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
     });
     console.log({
       success: true,
       message: 'Inicio de sesión exitoso',
       access_token,
-      })
+    })
 
     return res.json({
       success: true,
       message: 'Inicio de sesión exitoso',
       access_token,
-      
+
     });
   }
 
@@ -113,8 +125,11 @@ export class AuthController {
       // Setear nuevo access_token en cookies
       res.cookie('access_token', access_token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        // secure: process.env.NODE_ENV === 'production',
+        // sameSite: 'strict',
+        secure: true, // obligatorio si SameSite=None
+        sameSite: 'none', // permite envío cross-origin
+
         maxAge: 1000 * 60 * 15, // 15 minutos
       });
 
@@ -142,23 +157,23 @@ export class AuthController {
   }
 
   @Get('me')
-async me(@Req() req) {
-  const user = req.user; // extraído del token por tu guard JWT
-  console.log("USER ME", user)
-  // console.log("USER ME", req)
-  const rawCookie = req.headers['cookie'];
-  const cookies = parseCookies(rawCookie || '');
+  async me(@Req() req) {
+    const user = req.user; // extraído del token por tu guard JWT
+    console.log("USER ME", user)
+    // console.log("USER ME", req)
+    const rawCookie = req.headers['cookie'];
+    const cookies = parseCookies(rawCookie || '');
 
-  const accessToken = cookies['access_token'];
-  const refreshToken = cookies['refresh_token'];
+    const accessToken = cookies['access_token'];
+    const refreshToken = cookies['refresh_token'];
 
-  console.log('🔐 Access Token:', accessToken);
-  console.log('🔄 Refresh Token:', refreshToken);
-const payload = jwt.verify(accessToken, process.env.JWT_SECRET) as any;
+    console.log('🔐 Access Token:', accessToken);
+    console.log('🔄 Refresh Token:', refreshToken);
+    const payload = jwt.verify(accessToken, process.env.JWT_SECRET) as any;
 
-console.log('Payload del refresh token:', payload);
-  return { success: true, user:payload };
-}
+    console.log('Payload del refresh token:', payload);
+    return { success: true, user: payload };
+  }
 
 }
 function parseCookies(cookieHeader: string): Record<string, string> {
