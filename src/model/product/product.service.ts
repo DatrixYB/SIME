@@ -132,19 +132,26 @@ console.log("TYPEOF SERVICE SUPPLIER ID",typeof supId)
       const lowStock = await this.prisma.$queryRawUnsafe<
         { name: string; stock: number; minStock: number }[]
       >(`
-  SELECT name, stock,   minStock 
-  FROM product
-  WHERE stock <= minStock
+SELECT "name", "stock",   "minStock"FROM public."Product"
+  WHERE "stock" <= "minStock"
   ORDER BY stock ASC
   LIMIT 5
-
 `);
       return lowStock;
     } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      console.error('Error Prisma:', error.message);
+      const lowStock = [];
+    return lowStock;
+    }else{
       throw new InternalServerErrorException(
         `Error en findLowestStockProducts: ${error}`,
       );
     }
+    }
+
+
+    
   }
   // src/products/products.service.ts
   async getTopSellingProducts() {

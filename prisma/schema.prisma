@@ -1,51 +1,23 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-// generator client {
-//   provider = "prisma-client-js"
-//   // output   = "../generated/prisma"s
-// }
 generator client {
   provider = "prisma-client-js"
-  // output   = "./generated/prisma/client"
 }
 
 datasource db {
   provider = "postgresql"
-  // provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-enum OrderStatus {
-  PENDING
-  SENT
-  RECEIVED
-  CANCELLED
-}
-
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String   @default("usuario007")
-  password  String
-  role      UserRole
-  image     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  sales Sale[]
-  // Sale Sale[] @relation(onDelete: Cascade)
-
+  id            Int             @id @default(autoincrement())
+  email         String          @unique
+  name          String          @default("usuario007")
+  password      String
+  role          UserRole
+  image         String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   PurchaseOrder PurchaseOrder[]
-}
-
-enum UserRole {
-  ADMIN
-  SELLER
-  MANAGER
+  sales         Sale[]
 }
 
 model Client {
@@ -55,29 +27,26 @@ model Client {
   phone     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  sales Sale[]
+  sales     Sale[]
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  price       Float
-  stock       Int
-  minStock    Int      @default(5)
-  description String?
-  image       String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  saleItems SaleItem[]
-
-  PurchaseOrderItem PurchaseOrderItem[]
+  id                Int                 @id @default(autoincrement())
+  name              String
+  price             Float
+  stock             Int
+  minStock          Int                 @default(5)
+  description       String?
+  image             String?
+  isActive          Boolean             @default(true)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
   categoryId        Int
-  category          Category            @relation(fields: [categoryId], references: [id])
   supplierId        Int
+  category          Category            @relation(fields: [categoryId], references: [id])
   supplier          Supplier            @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  PurchaseOrderItem PurchaseOrderItem[]
+  saleItems         SaleItem[]
 }
 
 model Category {
@@ -87,39 +56,94 @@ model Category {
   products  Product[]
 }
 
-enum SaleStatus {
-  PENDING // Venta registrada pero no pagada
-  PAID // Pago confirmado
-  CANCELLED // Venta anulada
-  REFUNDED // Venta devuelta
-}
-
 model Sale {
   id        Int        @id @default(autoincrement())
   date      DateTime   @default(now())
   total     Float
   orden     Int
-  
   clientId  Int
   userId    Int
   paymentId Int
   status    SaleStatus @default(PENDING)
   client    Client     @relation(fields: [clientId], references: [id], onDelete: Cascade)
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   payment   Payment    @relation(fields: [paymentId], references: [id], onDelete: Cascade)
-
-  items SaleItem[]
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     SaleItem[]
 }
 
 model SaleItem {
-  id        Int   @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   saleId    Int
   productId Int
   quantity  Int
-  price     Float // Precio unitario en el momento de venta
+  price     Float
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sale      Sale    @relation(fields: [saleId], references: [id], onDelete: Cascade)
+}
 
-  sale    Sale    @relation(fields: [saleId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+model Payment {
+  id        Int           @id @default(autoincrement())
+  method    PaymentType
+  reference String?
+  paidAt    DateTime      @default(now())
+  amount    Float
+  status    PaymentStatus @default(PENDING)
+  Sale      Sale[]
+}
+
+model PurchaseOrder {
+  id          Int                 @id @default(autoincrement())
+  supplierId  Int
+  createdById Int
+  date        DateTime            @default(now())
+  status      OrderStatus
+  total       Float
+  createdBy   User                @relation(fields: [createdById], references: [id])
+  supplier    Supplier            @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  items       PurchaseOrderItem[]
+}
+
+model PurchaseOrderItem {
+  id        Int           @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  quantity  Int
+  unitPrice Float
+  order     PurchaseOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Supplier {
+  id          Int             @id @default(autoincrement())
+  name        String
+  contactName String?
+  email       String?
+  phone       String?
+  address     String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  products    Product[]
+  orders      PurchaseOrder[]
+}
+
+enum OrderStatus {
+  PENDING
+  SENT
+  RECEIVED
+  CANCELLED
+}
+
+enum UserRole {
+  ADMIN
+  SELLER
+  MANAGER
+}
+
+enum SaleStatus {
+  PENDING
+  PAID
+  CANCELLED
+  REFUNDED
 }
 
 enum PaymentStatus {
@@ -129,60 +153,9 @@ enum PaymentStatus {
   REFUNDED
 }
 
-model Payment {
-  id        Int           @id @default(autoincrement())
-  method    PaymentType
-  reference String? // Referencia bancaria, número de recibo, etc.
-  paidAt    DateTime      @default(now())
-  amount    Float
-  status    PaymentStatus @default(PENDING)
-
-  Sale Sale[]
-  // Sale Sale[] @relation(onDelete: Cascade)
-}
-
 enum PaymentType {
   CASH
   CARD
   TRANSFER
   DIGITAL_WALLET
-}
-
-model PurchaseOrder {
-  id          Int         @id @default(autoincrement())
-  supplierId  Int
-  createdById Int // Usuario (admin) que realizó el pedido
-  date        DateTime    @default(now())
-  status      OrderStatus
-  total       Float
-
-  supplier Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
-
-  createdBy User                @relation(fields: [createdById], references: [id])
-  items     PurchaseOrderItem[]
-}
-
-model PurchaseOrderItem {
-  id        Int   @id @default(autoincrement())
-  orderId   Int
-  productId Int
-  quantity  Int
-  unitPrice Float
-
-  order   PurchaseOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
-}
-
-model Supplier {
-  id          Int      @id @default(autoincrement())
-  name        String
-  contactName String?
-  email       String?
-  phone       String?
-  address     String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  orders   PurchaseOrder[]
-  products Product[]
 }
