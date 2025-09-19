@@ -15,7 +15,7 @@ import { OnModuleInit } from '@nestjs/common'
 export class UserService implements OnModuleInit {
   constructor(private readonly prisma: PrismaService) {}
   async onModuleInit() {
-    await this.ensureDefaultUser()
+    // await this.ensureDefaultUser()
   }
 
   /**
