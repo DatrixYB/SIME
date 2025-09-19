@@ -57,6 +57,7 @@ export class ProductController {
   /**
    * Devuelve todos los 5 productos con stock mas bajo (campos seguros).
    */
+  // products/low-stock
   @Get('stock-low')
   async find_5_stock_low() {
     return this.productService.findLowestStockProducts();

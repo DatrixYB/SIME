@@ -18,5 +18,6 @@ async function bootstrap() {
   await app.listen(port);
   console.log(`Server is running on port ${port}`);
   console.log(`Application is running on: ${await app.getUrl()}`);
+  console.log(`Application is cors on: ${await process.env.CORS_ORIGIN}`);
 }
 bootstrap();

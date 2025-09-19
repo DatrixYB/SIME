@@ -51,6 +51,8 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async signIn(@Body() dto: SignInDto, @Res() res: Response) {
+
+    console.log("DTO LOGIN", dto)
     const { access_token, refresh_token, user } = await this.authService.signIn(dto);
 
     res.cookie('access_token', access_token, {
