@@ -132,6 +132,7 @@ export class UserService implements OnModuleInit {
     id: number,
     dto: UpdateUserDto,
   ): Promise<Omit<User, 'password'>> {
+    console.log("DTO SERVICE",dto)
     const user = await this.prisma.user.findUnique({ where: { id } });
     if (!user) {
       throw new BadRequestException(`Usuario con ID ${id} no encontrado`);

@@ -13,6 +13,7 @@ import { UpdatePurchaseorderItemDto } from './dto/update-purchaseorder-item.dto'
 import { CreatePurchaseOrderIDto } from './dto/create-puchaseorderi.dto';
 
 @Controller('purchaseorder-item')
+
 export class PurchaseorderItemController {
   constructor(
     private readonly purchaseorderItemService: PurchaseorderItemService,
@@ -25,7 +26,7 @@ export class PurchaseorderItemController {
   // @Get('gato')
   @Post('bulk')
   async createMany(@Body() dto: CreatePurchaseOrderIDto){
-
+console.log("DTO CONTROLLER bulk",dto)
     return this.purchaseorderItemService.createPurchaseOrderItems(
       dto
     );

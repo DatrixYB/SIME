@@ -25,22 +25,28 @@ export class ProductService {
   }
 
   async createMany(dto: CreateManyProductsDto) {
+
+      const dataPayloadArray = dto.products.map(({ id, ...rest }) => rest)
+      console.log("DATA PAYLOAD ARRAY SERVICIO BULK",dataPayloadArray)
+      console.log("DATA BULK",dto.products)
     try {
       await this.prisma.product.createMany({
-        data: dto.products,
+        data: dataPayloadArray,
       });
       const created = await this.prisma.product.findMany({
         where: {
           name: {
-            in: dto.products.map((p) => p.name),
+            in: dataPayloadArray.map((p) => p.name),
           },
-          supplierId: { in: dto.products.map((p) => p.supplierId) }, // asumiendo que viene en el DTO
-          categoryId: { in: dto.products.map((p) => p.categoryId) }, // asumiendo que viene en el DTO
+          supplierId: { in: dataPayloadArray.map((p) => p.supplierId) }, // asumiendo que viene en el DTO
+          categoryId: { in: dataPayloadArray.map((p) => p.categoryId) }, // asumiendo que viene en el DTO
         },
         select: { id: true },
       });
       return created.map((p) => p.id);
     } catch (error) {
+      console.log("ERROR SERVICIO PRODUCTOS BULK",error)
+      console.log("ERROR BULK",error.message)
       throw new InternalServerErrorException(
         `Error al crear múltiples productos: ${error.message}`,
       );
@@ -159,21 +165,28 @@ SELECT "name", "stock",   "minStock"FROM public."Product"
     //   'SELECT p.name from pos_pyme.product p;',
     // );
     const result = await this.prisma.$queryRaw<
-      { name: string; sales: number; revenue: number }[]
+      { name: string; sales: bigint; revenue: bigint }[]
     >(
       Prisma.sql`
     SELECT 
       p.name,
       SUM(oi.quantity) AS sales,
       SUM(oi.quantity * oi.price) AS revenue
-    FROM pos_pyme.saleitem oi
-    JOIN pos_pyme.product p ON p.id = oi.productId
+    FROM public."SaleItem" oi
+    JOIN public."Product" p ON p.id = oi."productId"
     GROUP BY p.name
     ORDER BY revenue DESC
     LIMIT 3;
   `,
     );
-    return result;
+    // return stringifyNumbers(result)
+    const safeResult = result.map(obj => ({
+  ...obj,
+  sales: obj.sales.toString(),
+  revenue: obj.revenue.toString(),
+}))
+
+    return safeResult;
   }
 }
 

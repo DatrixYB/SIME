@@ -23,17 +23,19 @@ export class ProductController {
   /**
    * Crea un nuevo usuario. Valida con class-validator.
    */
-  @Post()
-  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  async create(@Body() createProductDto: CreateProductDto) {
-    const product = await this.productService.create(createProductDto);
-    return product.id;
-  }
   @Post('bulk')
   async createMany(@Body() createManyDto: CreateManyProductsDto) {
     console.log('Creating many products:', createManyDto);
     console.log('Payload final:', JSON.stringify(createManyDto, null, 2));
     return this.productService.createMany(createManyDto);
+  }
+
+
+  @Post()
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  async create(@Body() createProductDto: CreateProductDto) {
+    const product = await this.productService.create(createProductDto);
+    return product.id;
   }
 
   /**

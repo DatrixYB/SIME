@@ -27,7 +27,8 @@ export class SupplierService {
     return this.prisma.supplier.create({ data: dto });
   }
   async findAll() {
-    const suppliers = await this.prisma.supplier.findMany({
+    try {
+         const suppliers = await this.prisma.supplier.findMany({
       include: {
         orders: {
           include: {
@@ -59,6 +60,10 @@ export class SupplierService {
       };
     });
     return formatted;
+    } catch (error) {
+      console.error("Error fetching suppliers back:", error);
+    }
+ 
   }
   async findAllProduct() {
     // Devuelve todos los proveedores con sus pedidos y productos
@@ -125,8 +130,8 @@ export class SupplierService {
       s.name,
       COUNT(o.id) AS orders,
       SUM(o.total) AS amount
-    FROM purchaseorder o
-    JOIN supplier s ON s.id = o.supplierId
+    FROM public."PurchaseOrder" o
+    JOIN public."Supplier" s ON s.id = o."supplierId"
     GROUP BY s.name
     ORDER BY amount DESC
     LIMIT ${limit}

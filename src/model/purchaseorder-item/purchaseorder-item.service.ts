@@ -25,7 +25,7 @@ export class PurchaseorderItemService {
   }
   async createPurchaseOrderItems(dto: CreatePurchaseOrderIDto) {
   const { orderId, items } = dto;
-
+console.log("DTO SERVICE bulk",dto);
   return Promise.all(
     items.map(item => this.prisma.purchaseOrderItem.create({
       data: {

@@ -194,11 +194,13 @@ export class SaleService {
       { mes: number; sales: number; orders: bigint }[]
     >(
       Prisma.sql`
-     SELECT 
-       MONTH(oi.date) as mes,
-       SUM(oi.total) AS sales,
-       COUNT(*) AS orders
-     FROM pos_pyme.sale oi
+   SELECT 
+  EXTRACT(MONTH FROM oi."date") AS mes,
+  SUM(oi.total) AS sales,
+  COUNT(*) AS orders
+FROM public."Sale" oi
+GROUP BY mes
+ORDER BY mes;    
    `,
     );
     const monthNames = [

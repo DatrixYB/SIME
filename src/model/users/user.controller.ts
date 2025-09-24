@@ -9,7 +9,8 @@ import {
   ParseIntPipe,
   UsePipes,
   ValidationPipe,
-  UseGuards,  Headers
+  UseGuards,  Headers,
+  Put
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -64,12 +65,14 @@ manualVerify(@Headers('authorization') authHeader: string) {
   /**
    * Actualiza parcialmente un usuario.
    */
-  @Patch(':id')
-  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  // @Patch(':id')
+  @Put(':id')
+  // @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
   ) {
+    console.log('Updating user ID:', id, 'with data:', updateUserDto);
     return this.userService.update(id, updateUserDto);
   }
 
@@ -78,6 +81,7 @@ manualVerify(@Headers('authorization') authHeader: string) {
    */
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
+    console.log('Deleting user ID:', id);
     return this.userService.remove(id);
   }
 }
