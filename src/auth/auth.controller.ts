@@ -69,6 +69,7 @@ export class AuthController {
       secure: true, // obligatorio si SameSite=None
       sameSite: 'none', // permite envío cross-origin
  path: '/',
+ domain: process.env.CORS_ORIGIN,
 
       // sameSite: 'strict',
       maxAge: 1000 * 60 * 15, // 15 minutos
@@ -80,7 +81,7 @@ export class AuthController {
       secure: true, // obligatorio si SameSite=None
       sameSite: 'none', // permite envío cross-origin
  path: '/',
-
+domain: process.env.CORS_ORIGIN,
       // sameSite: 'strict',
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
     });
@@ -134,7 +135,7 @@ export class AuthController {
         secure: true, // obligatorio si SameSite=None
         sameSite: 'none', // permite envío cross-origin
  path: '/',
-
+domain: process.env.CORS_ORIGIN,
         maxAge: 1000 * 60 * 15, // 15 minutos
       });
 
